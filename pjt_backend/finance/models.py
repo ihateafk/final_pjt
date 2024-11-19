@@ -27,10 +27,10 @@ class Product(models.Model) :
 
 # 가입 상품
 class JoinProduct(models.Model) :
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
 # 관심 상품
 class FavoriteProduct(models.Model) :
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)

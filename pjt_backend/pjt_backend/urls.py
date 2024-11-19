@@ -23,6 +23,8 @@ urlpatterns = [
     # login and signup
     path('accounts/', include('dj_rest_auth.urls')),
     path('accounts/signup/', include('dj_rest_auth.registration.urls')),
+    # board
+    path('boards', include('board.urls')),
     # spectacular
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     # spectacular Optional UI:
