@@ -2,10 +2,8 @@ from rest_framework import serializers
 from allauth.account.adapter import get_adapter
 from allauth.account import app_settings as allauth_account_settings
 from allauth.socialaccount.models import EmailAddress
-from django.core.exceptions import ValidationError as DjangoValidationError
-from allauth.account.utils import setup_user_email
 from dj_rest_auth.registration.serializers import RegisterSerializer
-from dj_rest_auth.serializers import LoginSerializer, UserDetailsSerializer
+from dj_rest_auth.serializers import UserDetailsSerializer
 from django.contrib.auth import get_user_model
 from .models import User, Job
 
@@ -23,6 +21,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 
 class CustomRegisterSerializer(RegisterSerializer):
+    # 입력 받기 위해 abstratuser 모델에서 추가된 필드들 추가
     name = serializers.CharField(required=True)
     age = serializers.IntegerField(required=True)
     gender = serializers.CharField(required=True)
@@ -35,12 +34,12 @@ class CustomRegisterSerializer(RegisterSerializer):
     def validate_username(self, username):
         return None
     
-    # email 중복되면 에러메시지    
     def validate_email(self, email):
+        # email 중복되면 에러메시지    
         email = get_adapter().clean_email(email)
         if User.objects.filter(email=email).exists():
             raise serializers.ValidationError("This email already exists.")
-        
+        # 이건 유효성 검사(원래 있던거)
         if allauth_account_settings.UNIQUE_EMAIL:
             if email and EmailAddress.objects.is_verified(email):
                 raise serializers.ValidationError(
@@ -48,6 +47,7 @@ class CustomRegisterSerializer(RegisterSerializer):
                 )
         return email
     
+    # 회원가입시 입력한 데이터 받아오는 메소드
     def get_cleaned_data(self):
         return {
             'username': self.validated_data.get('username', ''),
@@ -63,6 +63,7 @@ class CustomRegisterSerializer(RegisterSerializer):
 
 UserModel = get_user_model()
 
+# 추가된 필드들을 포함한 유저 정보를 프론트서버로 보내기 위한 시리얼라이저
 class CustomUserDetailSerializer(UserDetailsSerializer):
     class Meta:
         extra_fields = []

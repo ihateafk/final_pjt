@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     # Use for SWAGGER
     'drf_spectacular',
-    # common settings
+    # Common settings
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -164,13 +164,13 @@ REST_AUTH = {
     'USER_DETAILS_SERIALIZER': 'accounts.serializers.CustomUserDetailSerializer',
 }
 ## django-allauth SETTINGS
-ACCOUNT_EMAIL_VERIFICATION = "none"
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_VERIFICATION = "none" # 계속 이메일 인증 하려고 해서 none 옵션으로 바꿈
+ACCOUNT_AUTHENTICATION_METHOD = 'email' # 로그인 시에 email 사용 다른 옵션으로는 username, username_email(둘 중 아무거나 사용 or 과 같음)
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_USER_MODEL_USERNAME_FIELD = None
-ACCOUNT_ADAPTER = 'accounts.adapters.CustomAccountAdapter'
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None # username 필드 사용 안하는 옵션
+ACCOUNT_ADAPTER = 'accounts.adapters.CustomAccountAdapter' # 커스텀 adapter를 사용하기 위한 옵션
 
 # DRF SPECTACULAR SETTINGS
 SPECTACULAR_SETTINGS = {
@@ -187,4 +187,5 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5173",
 ]
 
+# User model SETTINGS
 AUTH_USER_MODEL = 'accounts.User'
