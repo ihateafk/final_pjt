@@ -174,3 +174,15 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
+
+# env 파일 설정
+import environ
+import os
+
+env = environ.Env(DEBUG=(bool, True))
+
+environ.Env.read_env(
+    env_file = os.path.join(BASE_DIR, '.env')
+)
+
+API_KEY = env('API_KEY')

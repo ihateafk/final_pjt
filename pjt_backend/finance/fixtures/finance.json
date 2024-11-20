@@ -1,0 +1,149 @@
+[
+{
+    "model": "finance.fincategory",
+    "pk": 1,
+    "fields": {
+        "fin_category": "예금"
+    }
+},
+{
+    "model": "finance.fincategory",
+    "pk": 2,
+    "fields": {
+        "fin_category": "적금"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 1,
+    "fields": {
+        "company_name": "우리은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 2,
+    "fields": {
+        "company_name": "한국스탠다드차타드은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 3,
+    "fields": {
+        "company_name": "아이엠뱅크"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 4,
+    "fields": {
+        "company_name": "부산은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 5,
+    "fields": {
+        "company_name": "광주은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 6,
+    "fields": {
+        "company_name": "제주은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 7,
+    "fields": {
+        "company_name": "전북은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 8,
+    "fields": {
+        "company_name": "경남은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 9,
+    "fields": {
+        "company_name": "중소기업은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 10,
+    "fields": {
+        "company_name": "한국산업은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 11,
+    "fields": {
+        "company_name": "국민은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 12,
+    "fields": {
+        "company_name": "전국은행연합회"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 13,
+    "fields": {
+        "company_name": "신한은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 14,
+    "fields": {
+        "company_name": "농협은행주식회사"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 15,
+    "fields": {
+        "company_name": "하나은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 16,
+    "fields": {
+        "company_name": "주식회사 케이뱅크"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 17,
+    "fields": {
+        "company_name": "수협은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 18,
+    "fields": {
+        "company_name": "주식회사 카카오뱅크"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 19,
+    "fields": {
+        "company_name": "토스뱅크 주식회사"
+    }
+}
+]
