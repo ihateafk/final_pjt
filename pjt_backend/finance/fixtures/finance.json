@@ -145,5 +145,950 @@
     "fields": {
         "company_name": "토스뱅크 주식회사"
     }
+},
+{
+    "model": "finance.company",
+    "pk": 20,
+    "fields": {
+        "company_name": "현대카드㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 21,
+    "fields": {
+        "company_name": "롯데카드㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 22,
+    "fields": {
+        "company_name": "비씨카드㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 23,
+    "fields": {
+        "company_name": "삼성카드㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 24,
+    "fields": {
+        "company_name": "신한카드㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 25,
+    "fields": {
+        "company_name": "오케이캐피탈 ㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 26,
+    "fields": {
+        "company_name": "한국캐피탈㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 27,
+    "fields": {
+        "company_name": "케이비캐피탈㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 28,
+    "fields": {
+        "company_name": "우리금융캐피탈㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 29,
+    "fields": {
+        "company_name": "롯데캐피탈㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 30,
+    "fields": {
+        "company_name": "제이비우리캐피탈㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 31,
+    "fields": {
+        "company_name": "하나캐피탈㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 32,
+    "fields": {
+        "company_name": "현대캐피탈㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 33,
+    "fields": {
+        "company_name": "미래에셋캐피탈㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 34,
+    "fields": {
+        "company_name": "㈜아이비케이캐피탈"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 35,
+    "fields": {
+        "company_name": "알씨아이파이낸셜서비스코리아㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 36,
+    "fields": {
+        "company_name": "㈜애큐온캐피탈"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 37,
+    "fields": {
+        "company_name": "현대커머셜㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 38,
+    "fields": {
+        "company_name": "엔에이치농협캐피탈㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 39,
+    "fields": {
+        "company_name": "에이캐피탈㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 40,
+    "fields": {
+        "company_name": "㈜아이엠캐피탈"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 41,
+    "fields": {
+        "company_name": "비엔케이캐피탈㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 42,
+    "fields": {
+        "company_name": "폭스바겐파이낸셜서비스코리아㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 43,
+    "fields": {
+        "company_name": "㈜케이비국민카드"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 44,
+    "fields": {
+        "company_name": "메리츠캐피탈㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 45,
+    "fields": {
+        "company_name": "롯데오토리스㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 46,
+    "fields": {
+        "company_name": "㈜우리카드"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 47,
+    "fields": {
+        "company_name": "도이치파이낸셜㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 48,
+    "fields": {
+        "company_name": "하나카드㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 49,
+    "fields": {
+        "company_name": "한국투자캐피탈㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 50,
+    "fields": {
+        "company_name": "웰컴캐피탈㈜"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 51,
+    "fields": {
+        "company_name": "애큐온저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 52,
+    "fields": {
+        "company_name": "오에스비저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 53,
+    "fields": {
+        "company_name": "디비저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 54,
+    "fields": {
+        "company_name": "스카이저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 55,
+    "fields": {
+        "company_name": "민국저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 56,
+    "fields": {
+        "company_name": "푸른상호저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 57,
+    "fields": {
+        "company_name": "HB저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 58,
+    "fields": {
+        "company_name": "키움예스저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 59,
+    "fields": {
+        "company_name": "더케이저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 60,
+    "fields": {
+        "company_name": "조은저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 61,
+    "fields": {
+        "company_name": "에스비아이저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 62,
+    "fields": {
+        "company_name": "바로저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 63,
+    "fields": {
+        "company_name": "다올저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 64,
+    "fields": {
+        "company_name": "유안타저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 65,
+    "fields": {
+        "company_name": "고려저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 66,
+    "fields": {
+        "company_name": "국제저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 67,
+    "fields": {
+        "company_name": "디에이치저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 68,
+    "fields": {
+        "company_name": "흥국저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 69,
+    "fields": {
+        "company_name": "우리저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 70,
+    "fields": {
+        "company_name": "인성저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 71,
+    "fields": {
+        "company_name": "금화저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 72,
+    "fields": {
+        "company_name": "인천저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 73,
+    "fields": {
+        "company_name": "모아저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 74,
+    "fields": {
+        "company_name": "대백저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 75,
+    "fields": {
+        "company_name": "유니온상호저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 76,
+    "fields": {
+        "company_name": "엠에스상호저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 77,
+    "fields": {
+        "company_name": "안국저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 78,
+    "fields": {
+        "company_name": "남양저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 79,
+    "fields": {
+        "company_name": "부림저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 80,
+    "fields": {
+        "company_name": "키움저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 81,
+    "fields": {
+        "company_name": "삼정저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 82,
+    "fields": {
+        "company_name": "평택저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 83,
+    "fields": {
+        "company_name": "안양저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 84,
+    "fields": {
+        "company_name": "영진저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 85,
+    "fields": {
+        "company_name": "융창저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 86,
+    "fields": {
+        "company_name": "세람상호저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 87,
+    "fields": {
+        "company_name": "페퍼저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 88,
+    "fields": {
+        "company_name": "상상인저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 89,
+    "fields": {
+        "company_name": "한화저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 90,
+    "fields": {
+        "company_name": "CK저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 91,
+    "fields": {
+        "company_name": "대명상호저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 92,
+    "fields": {
+        "company_name": "우리금융저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 93,
+    "fields": {
+        "company_name": "청주저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 94,
+    "fields": {
+        "company_name": "한성저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 95,
+    "fields": {
+        "company_name": "상상인플러스저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 96,
+    "fields": {
+        "company_name": "아산저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 97,
+    "fields": {
+        "company_name": "오투저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 98,
+    "fields": {
+        "company_name": "스타저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 99,
+    "fields": {
+        "company_name": "대한저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 100,
+    "fields": {
+        "company_name": "동양저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 101,
+    "fields": {
+        "company_name": "더블저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 102,
+    "fields": {
+        "company_name": "센트럴저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 103,
+    "fields": {
+        "company_name": "스마트저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 104,
+    "fields": {
+        "company_name": "한국투자저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 105,
+    "fields": {
+        "company_name": "라온저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 106,
+    "fields": {
+        "company_name": "드림저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 107,
+    "fields": {
+        "company_name": "대아상호저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 108,
+    "fields": {
+        "company_name": "머스트삼일저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 109,
+    "fields": {
+        "company_name": "참저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 110,
+    "fields": {
+        "company_name": "오성저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 111,
+    "fields": {
+        "company_name": "대원상호저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 112,
+    "fields": {
+        "company_name": "에스앤티저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 113,
+    "fields": {
+        "company_name": "솔브레인저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 114,
+    "fields": {
+        "company_name": "동원제일저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 115,
+    "fields": {
+        "company_name": "조흥저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 116,
+    "fields": {
+        "company_name": "진주저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 117,
+    "fields": {
+        "company_name": "예가람저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 118,
+    "fields": {
+        "company_name": "제이티저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 119,
+    "fields": {
+        "company_name": "삼호저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 120,
+    "fields": {
+        "company_name": "엔에이치저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 121,
+    "fields": {
+        "company_name": "대신저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 122,
+    "fields": {
+        "company_name": "아이비케이저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 123,
+    "fields": {
+        "company_name": "비엔케이저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 124,
+    "fields": {
+        "company_name": "케이비저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 125,
+    "fields": {
+        "company_name": "하나저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 126,
+    "fields": {
+        "company_name": "제이티친애저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 127,
+    "fields": {
+        "company_name": "신한저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 128,
+    "fields": {
+        "company_name": "웰컴저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 129,
+    "fields": {
+        "company_name": "오케이저축은행"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 130,
+    "fields": {
+        "company_name": "한화생명보험주식회사"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 131,
+    "fields": {
+        "company_name": "에이비엘생명보험주식회사"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 132,
+    "fields": {
+        "company_name": "삼성생명보험주식회사"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 133,
+    "fields": {
+        "company_name": "흥국생명보험주식회사"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 134,
+    "fields": {
+        "company_name": "교보생명보험주식회사"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 135,
+    "fields": {
+        "company_name": "신한라이프생명보험주식회사"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 136,
+    "fields": {
+        "company_name": "케이디비생명보험주식회사"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 137,
+    "fields": {
+        "company_name": "미래에셋생명보험주식회사"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 138,
+    "fields": {
+        "company_name": "하나생명보험주식회사"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 139,
+    "fields": {
+        "company_name": "동양생명보험주식회사"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 140,
+    "fields": {
+        "company_name": "롯데손해보험주식회사"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 141,
+    "fields": {
+        "company_name": "삼성화재해상보험주식회사"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 142,
+    "fields": {
+        "company_name": "현대해상화재보험주식회사"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 143,
+    "fields": {
+        "company_name": "주식회사KB손해보험"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 144,
+    "fields": {
+        "company_name": "DB손해보험주식회사"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 145,
+    "fields": {
+        "company_name": "푸본현대생명보험주식회사"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 146,
+    "fields": {
+        "company_name": "농협생명보험주식회사"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 147,
+    "fields": {
+        "company_name": "농협손해보험주식회사"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 148,
+    "fields": {
+        "company_name": "유진자산운용"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 149,
+    "fields": {
+        "company_name": "유리자산운용"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 150,
+    "fields": {
+        "company_name": "현대인베스트먼트자산운용"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 151,
+    "fields": {
+        "company_name": "비엔케이자산운용"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 152,
+    "fields": {
+        "company_name": "현대자산운용"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 153,
+    "fields": {
+        "company_name": "브이아이자산운용 주식회사"
+    }
+},
+{
+    "model": "finance.company",
+    "pk": 154,
+    "fields": {
+        "company_name": "플러스자산운용"
+    }
 }
 ]
