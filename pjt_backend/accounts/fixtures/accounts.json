@@ -1,0 +1,16 @@
+[
+{
+    "model": "accounts.job",
+    "pk": 1,
+    "fields": {
+        "job_name": "개발자"
+    }
+},
+{
+    "model": "accounts.job",
+    "pk": 2,
+    "fields": {
+        "job_name": "SQL 개발자"
+    }
+}
+]
