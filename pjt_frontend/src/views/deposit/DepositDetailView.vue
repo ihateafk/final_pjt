@@ -10,7 +10,6 @@
     <p>우대 조건 : {{ store.depositItem.spcl_cnd }}</p>
     <p>가입 대상 : {{ store.depositItem.join_member }}</p>
     <p>유의 사항 : {{ store.depositItem.etc_note }}</p>
-    <p>최고 한도 : {{ store.depositItem.max_limit }}</p>
   </div>
   <hr>
 </template>

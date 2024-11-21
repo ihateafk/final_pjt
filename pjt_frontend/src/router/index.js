@@ -6,6 +6,7 @@ import MapView from '@/views/MapView.vue'
 import BoardView from '@/views/BoardView.vue'
 import LoginPage from '@/components/LoginPage.vue'
 import DepositDetailView from '@/views/deposit/DepositDetailView.vue'
+import SavingsDetailView from '@/views/savings/SavingsDetailView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,6 +35,11 @@ const router = createRouter({
       path: '/deposit/:id',
       name: 'depositDetail',
       component: DepositDetailView
+    },
+    {
+      path: '/savings/:id',
+      name: 'savingsDetail',
+      component: SavingsDetailView
     },
     {
       path: '/exchange',
