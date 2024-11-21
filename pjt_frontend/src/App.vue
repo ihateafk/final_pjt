@@ -43,7 +43,9 @@ const logout = function () {
           <div id="islogin" v-if="userStore.token !== null">
             상품추천링크
             <div id="myprofile">
-              <div id="profile"></div>
+              <div id="profile">
+                <RouterLink :to="{ name: 'profile'}">MyPage</RouterLink>
+              </div>
               <div id="logout">
                 <button @click="logout">Logout</button>
               </div>

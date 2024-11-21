@@ -80,6 +80,46 @@ const router = createRouter({
       name: 'board',
       component: BoardView
     },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: () => import('@/views/profile/ProfileView.vue'),
+      children: [
+        { path: 'main', name: 'profilemain', component: () => import('@/components/profile/ProfileMain.vue') },
+        { path: 'favorate', name: 'favorate', component: () => import('@/components/profile/ProfileFavorate.vue') },
+        { path: 'subscribe', name: 'subscribe', component: () => import('@/components/profile/ProfileSubscribe.vue') },
+        {
+          path: 'person',
+          name: 'person',
+          component: () => import('@/components/profile/ProfilePerson.vue'),
+          children: [
+            {
+              path: 'change',
+              name: 'infochange',
+              component: () => import('@/components/profile/ProfilePersonInfoChange.vue'),
+              children: [
+                {
+                  path: 'pw',
+                  name: 'pwchange',
+                  component: () => import('@/components/profile/ProfilePwChange.vue')
+                },
+              ]
+            },
+          ]
+        },
+      ],
+
+      beforeEnter: (to, from, next) => {
+        const userStore = useUserStore()
+
+        if (userStore.token !== null) {
+          next()
+        } else {
+          alert('로그인이 필요합니다.')
+          next({ name: 'login' })
+        }
+      }
+    }
   ],
 })
 
