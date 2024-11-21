@@ -50,8 +50,8 @@ const callDeposit = async () => {
         pageNo: 1
       },
     })
-
     depositList.value = response.data.result.baseList
+    console.log(response)
     depositOptionList.value = response.data.result.optionList
   } catch (err) {
     console.error('API 호출 에러:', err)

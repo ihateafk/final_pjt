@@ -4,9 +4,9 @@ import DepositView from '@/views/deposit/DepositView.vue'
 import ExchangeView from '@/views/ExchangeView.vue'
 import MapView from '@/views/MapView.vue'
 import BoardView from '@/views/BoardView.vue'
-import LoginPage from '@/components/LoginPage.vue'
 import DepositDetailView from '@/views/deposit/DepositDetailView.vue'
 import SavingsDetailView from '@/views/savings/SavingsDetailView.vue'
+import { useUserStore } from '@/stores/user'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,11 +20,35 @@ const router = createRouter({
       path: '/signup',
       name: 'signup',
       component: () => import('@/components/SignUpPage.vue'),
+
+      beforeEnter: (to, from, next) => {
+        const userStore = useUserStore()
+
+        if (userStore.token !== null) {
+          alert('이미 로그인 되어 있습니다.')
+          next({ name: 'home' })
+        }
+        else {
+          next()
+        }
+      }
     },
     {
       path: '/login',
       name: 'login',
-      component: LoginPage
+      component: () => import('@/components/LoginPage.vue'),
+
+      beforeEnter: (to, from, next) => {
+        const userStore = useUserStore()
+
+        if (userStore.token !== null) {
+          alert('이미 로그인 되어 있습니다.')
+          next(from)
+        }
+        else {
+          next()
+        }
+      }
     },
     {
       path: '/deposit',
