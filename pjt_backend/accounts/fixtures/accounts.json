@@ -1,16 +1,50 @@
 [
 {
-    "model": "accounts.job",
+    "model": "accounts.user",
     "pk": 1,
     "fields": {
-        "job_name": "개발자"
+        "password": "pbkdf2_sha256$600000$pH3tFcN2PTbGlaHOVH81az$kxJV1RfPV73PqqzSfs/6258T4jjdwHg+1dvO+r/HJr0=",
+        "last_login": "2024-11-21T02:41:31.034Z",
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-21T02:41:30.802Z",
+        "name": "test1",
+        "email": "test1@ssafy.com",
+        "age": 20,
+        "gender": "남",
+        "birthday": "1993-01-01",
+        "address": "광주 광산구 하남산단",
+        "servay_yn": false,
+        "job": "IT개발자",
+        "groups": [],
+        "user_permissions": []
     }
 },
 {
-    "model": "accounts.job",
+    "model": "accounts.user",
     "pk": 2,
     "fields": {
-        "job_name": "SQL 개발자"
+        "password": "pbkdf2_sha256$600000$mJD8hA0gyP2Le4q4g6xyXX$jFYc6L92TPuwgmABL2+qm8TDUCVLAXFwLPOAs+SLGIo=",
+        "last_login": "2024-11-21T02:45:52.216Z",
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-21T02:45:51.995Z",
+        "name": "test2",
+        "email": "test2@ssafy.com",
+        "age": 20,
+        "gender": "여",
+        "birthday": "1993-01-01",
+        "address": "광주 광산구 하남산단",
+        "servay_yn": false,
+        "job": "사장",
+        "groups": [],
+        "user_permissions": []
     }
 }
 ]

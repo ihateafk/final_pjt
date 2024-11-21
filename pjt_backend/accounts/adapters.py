@@ -1,6 +1,6 @@
 from allauth.account.adapter import DefaultAccountAdapter
 from rest_framework import serializers
-from .models import Job
+# from .models import Job
 
 # adapter는 django-allauth의 기본 동작(로그인, 회원가입, 비번변경 등등)을
 # 커스텀 하고 싶을때 쓰는 모듈이다
@@ -26,7 +26,8 @@ class CustomAccountAdapter(DefaultAccountAdapter):
         gender = data.get('gender')
         birthday = data.get('birthday')
         address = data.get('address')
-        job_id = data.get('job_id')
+        # job_id = data.get('job_id')
+        job = data.get('job')
         user_email(user, email)
         user_username(user, username)
         if first_name:
@@ -45,12 +46,14 @@ class CustomAccountAdapter(DefaultAccountAdapter):
             user_field(user, "address", address)
         # job_id를 외래키로 Job 테이블에서 job_name을 가져올 것이기 때문에
         # job_id를 키로 갖는 튜플을 job 테이블에서 가져와 할당한다
-        if job_id:
-            try:
-                job_instance = Job.objects.get(pk=job_id)
-                user.job_id = job_instance
-            except Job.DoesNotExist:
-                raise serializers.ValidationError("Invalid job_id provided.")
+        # if job_id:
+        #     try:
+        #         job_instance = Job.objects.get(pk=job_id)
+        #         user.job_id = job_instance
+        #     except Job.DoesNotExist:
+        #         raise serializers.ValidationError("Invalid job_id provided.")
+        if job:
+            user_field(user, "job", job)
         if "password1" in data:
             user.set_password(data["password1"])
         elif "password" in data:

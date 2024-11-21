@@ -5,19 +5,19 @@ from allauth.socialaccount.models import EmailAddress
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from dj_rest_auth.serializers import UserDetailsSerializer
 from django.contrib.auth import get_user_model
-from .models import User, Job
+from .models import User
 
 class UserProfileSerializer(serializers.ModelSerializer):
-    class UserJobNameSeiralizer(serializers.ModelSerializer):
-        class Meta:
-            model = Job
-            fields = ('job_name',)
+    # class UserJobNameSeiralizer(serializers.ModelSerializer):
+    #     class Meta:
+    #         model = Job
+    #         fields = ('job_name',)
             
-    job = UserJobNameSeiralizer(read_only=True)
+    # job = UserJobNameSeiralizer(read_only=True)
     
     class Meta:
         model = User
-        fields = ('name', 'email', 'age', 'gender', 'birthday', 'address', 'job_id')
+        fields = ('name', 'email', 'age', 'gender', 'birthday', 'address', 'job')
 
 
 class CustomRegisterSerializer(RegisterSerializer):
@@ -27,7 +27,8 @@ class CustomRegisterSerializer(RegisterSerializer):
     gender = serializers.CharField(required=True)
     birthday = serializers.DateField(required=True)
     address = serializers.CharField(required=True)
-    job_id = serializers.IntegerField(required=True)
+    # job_id = serializers.IntegerField(required=True)
+    job = serializers.CharField(required=False)
     
     # username 필드 제거
     username = None
@@ -58,7 +59,8 @@ class CustomRegisterSerializer(RegisterSerializer):
             'gender': self.validated_data.get('gender', ''),
             'birthday': self.validated_data.get('birthday', ''),
             'address': self.validated_data.get('address', ''),
-            'job_id': self.validated_data.get('job_id', ''),
+            # 'job_id': self.validated_data.get('job_id', ''),
+            'job': self.validated_data.get('job', ''),
         }
 
 UserModel = get_user_model()
@@ -89,8 +91,10 @@ class CustomUserDetailSerializer(UserDetailsSerializer):
             extra_fields.append('birthday')
         if hasattr(UserModel, 'address'):
             extra_fields.append('address')
-        if hasattr(UserModel, 'job_id'):
-            extra_fields.append('job_id')
+        # if hasattr(UserModel, 'job_id'):
+        #     extra_fields.append('job_id')
+        if hasattr(UserModel, 'job'):
+            extra_fields.append('job')
         model = UserModel
         fields = ('pk', *extra_fields)
         read_only_fields = ('email',)
