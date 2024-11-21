@@ -15,7 +15,7 @@
 <script setup>
   import { ref } from 'vue';
   import DepositList from '@/components/deposit/DepositList.vue';
-  import SavingsList from '@/components/SavingsList.vue';
+  import SavingsList from '@/components/savings/SavingsList.vue';
 
   const selectedView = ref('deposit')
 
