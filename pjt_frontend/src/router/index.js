@@ -19,7 +19,7 @@ const router = createRouter({
     {
       path: '/signup',
       name: 'signup',
-      component: () => import('@/components/SignUpPage.vue'),
+      component: () => import('@/components/accounts/SignUpPage.vue'),
 
       beforeEnter: (to, from, next) => {
         const userStore = useUserStore()
@@ -36,7 +36,7 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('@/components/LoginPage.vue'),
+      component: () => import('@/components/accounts/LoginPage.vue'),
 
       beforeEnter: (to, from, next) => {
         const userStore = useUserStore()
