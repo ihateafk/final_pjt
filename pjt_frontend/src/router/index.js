@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import DepositView from '@/views/deposit/DepositView.vue'
-import ExchangeView from '@/views/ExchangeView.vue'
+import ExchangeView from '@/views/exchange/ExchangeView.vue'
 import MapView from '@/views/map/MapView.vue'
 import BoardView from '@/views/BoardView.vue'
 import DepositDetailView from '@/views/deposit/DepositDetailView.vue'
