@@ -8,6 +8,9 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from .models import Company, Product, FinCategory
 from .serializers import CompanySerializer, ProductAddSerializer, OptionAddSerializer, favoriteProductSerializer, JoinProductSerializer,ProductDetailSerializer
+from .utils import addProductAndOptions
+
+
 # Create your views here.
 
 # 금융 회사 목록 불러와서 저장하는 view
@@ -44,57 +47,42 @@ def companyload(request) :
 
     return JsonResponse({'message' : 'company name save okay'})
 
-# 상품 DB에 저장
 
 # 관심 상품 조회 및 추가
-@api_view(['GET', 'POST'])
+@api_view(['GET', 'POST', 'DELETE'])
 @permission_classes([IsAuthenticated])
 def favoriteProduct(request):
-    if Product.objects.filter(fin_prdt_cd=request.data['base']['fin_prdt_cd']).exists():
-        product = Product.objects.get(fin_prdt_cd=request.data['base']['fin_prdt_cd'])
-        data = {
-            'user': request.user.pk,
-            'product': product.pk,
-        }
+    if request.method == 'POST':
+        # DB에 있는지 없는지 검사해서 상품 및 유저 pk 반환
+        data = addProductAndOptions(request.user, request.data)
+
+        # 레코드 중복 검사
+        if request.user.favoriteproduct_set.filter(product_id=data['product']).exists():
+            return Response(status=status.HTTP_503_SERVICE_UNAVAILABLE)
+        
         serializer = favoriteProductSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-    else:
-        # add product and options
-        ## add product
-        product_data = request.data['base']
-        company = Company.objects.get(fin_co_no=product_data['fin_co_no'])
-        fin_category = FinCategory.objects.get(pk=request.data['fin_category'])
-        product_data.update(fin_category=fin_category)
-        
-        serializer = ProductAddSerializer(data=product_data)
-        if serializer.is_valid(raise_exception=True):
-            product = serializer.save(product_company=company, fin_category=fin_category)
 
-            ## add options
-            options = request.data['options']
-            for i in range(len(options)):
-                serializer = OptionAddSerializer(data=options[i])
-                if serializer.is_valid():
-                    serializer.save(base_product=product)
-
-            # add favorite
-            data = {
-                'user': request.user.pk,
-                'product': product.pk,
-            }
-            serializer = favoriteProductSerializer(data=data)
-            if serializer.is_valid(raise_exception=True):
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 # 가입 상품 조회 및 추가
-@api_view(['GET', 'POST'])
+@api_view(['GET', 'POST', 'DELETE'])
 @permission_classes([IsAuthenticated])
 def joinProduct(request):
-    pass
+    if request.method == 'POST':
+        # DB에 있는지 없는지 검사해서 상품 및 유저 pk 반환
+        data = addProductAndOptions(request.user, request.data)
+
+        # 레코드 중복 검사
+        if request.user.joinproduct_set.filter(product_id=data['product']).exists():
+            return Response(status=status.HTTP_503_SERVICE_UNAVAILABLE)
+        
+        serializer = JoinProductSerializer(data=data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 # # 예금 목록 불러와서 상품 DB에 저장하는 view
