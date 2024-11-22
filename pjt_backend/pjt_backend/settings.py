@@ -152,7 +152,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
@@ -189,3 +189,15 @@ CORS_ALLOWED_ORIGINS = [
 
 # User model SETTINGS
 AUTH_USER_MODEL = 'accounts.User'
+
+# Other SETTINGS
+import environ
+import os
+
+env = environ.Env(DEBUG=(bool, True))
+
+environ.Env.read_env(
+    env_file = os.path.join(BASE_DIR, '.env')
+)
+
+API_KEY = env('API_KEY')

@@ -54,7 +54,7 @@ const login = function () {
     }
   })
     .then((res) => {
-      userStore.token = res.data
+      userStore.token = res.data.key
       console.log("LOGIN SUCCESS")
       router.push({ name: 'home' })
     })

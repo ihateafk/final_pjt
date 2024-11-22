@@ -46,6 +46,8 @@
 
   const savingsItemchange = function () {
     store.savingsItem = props.savings
+    const options = props.optionList.filter(opt => props.savings.fin_prdt_cd === opt.fin_prdt_cd)
+    store.savingsOptionList = options
   }
 
   const getInterestRate = (month) => {

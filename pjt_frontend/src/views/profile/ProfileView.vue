@@ -11,7 +11,7 @@
             <RouterLink :to="{ name: 'person' }">개인 정보</RouterLink>
           </div>
           <div>
-            <RouterLink :to="{ name: 'favorate' }">관심 상품</RouterLink>
+            <RouterLink :to="{ name: 'favorite' }">관심 상품</RouterLink>
           </div>
           <div>
             <RouterLink :to="{ name: 'subscribe' }">가입 상품</RouterLink>

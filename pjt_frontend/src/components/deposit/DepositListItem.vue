@@ -47,6 +47,8 @@
  
  const depositItemchange = function () {
   store.depositItem = props.deposit
+  const options = props.optionList.filter(opt => props.deposit.fin_prdt_cd === opt.fin_prdt_cd)
+  store.depositOptionList = options
  }
  
  // 저축 기간별 금리 계산 함수
