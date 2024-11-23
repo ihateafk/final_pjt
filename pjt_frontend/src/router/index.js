@@ -8,6 +8,8 @@ import DepositDetailView from '@/views/deposit/DepositDetailView.vue'
 import SavingsDetailView from '@/views/savings/SavingsDetailView.vue'
 import { useUserStore } from '@/stores/user'
 import BoardCreateView from '@/views/boards/BoardCreateView.vue'
+import BoardDetailView from '@/views/boards/BoardDetailView.vue'
+import BoardUpdateView from '@/views/boards/BoardUpdateView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -85,6 +87,16 @@ const router = createRouter({
       path: '/board/create',
       name: 'boardcreate',
       component: BoardCreateView
+    },
+    {
+      path: '/board/:id',
+      name: 'boardsDetail',
+      component: BoardDetailView
+    },
+    {
+      path: '/board/:id/update',
+      name: 'boardUpdate',
+      component: BoardUpdateView
     },
     {
       path: '/profile',

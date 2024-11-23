@@ -21,3 +21,13 @@ def profile(request):
     if request.method == 'DELETE':
         request.user.delete()
         return Response({ 'process': True }, status=status.HTTP_204_NO_CONTENT)
+    
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def current_user(request):
+    return Response({
+        'pk': request.user.pk,
+        'username': request.user.username,
+        'email': request.user.email,
+    })
