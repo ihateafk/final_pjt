@@ -2,16 +2,16 @@
   <div>
     <div id="title">개인정보</div>
     <div id="body">
-      <div v-if="userdata">
+      <div v-if="userStore.userdata">
         <PersonInfoItem
-          v-for="(value, key) in userdata"
+          v-for="(value, key) in userStore.userdata"
           :key="key"
           :data="{ key: key, value: value }"
         />
       </div>
     </div>
     <div id="bottom">
-      <!-- <button @click="goToChangePage">수정하기</button> -->
+      <button @click="goToChangeInfo">개인 정보 수정</button>
     </div>
   </div>
 </template>
@@ -20,16 +20,18 @@
 import PersonInfoItem from '@/components/profile/PersonInfoItem.vue'
 import { useUserStore } from '@/stores/user';
 import axios from 'axios';
-import { onBeforeMount, ref } from 'vue';
+import { computed, onBeforeMount, ref } from 'vue';
 import { useRouter } from 'vue-router';
+
 
 const router = useRouter()
 const userStore = useUserStore()
 
-const userdata = ref(null)
 
-const goToChangePage = function () {
-  router.push({ name: 'infochange' })
+const goToChangeInfo = function () {
+  router.push({
+    name: 'infochange'
+  })
 }
 
 onBeforeMount(() => {
@@ -42,7 +44,7 @@ onBeforeMount(() => {
   })
     .then((res) => {
       console.log("LOAD SUCCESS")
-      userdata.value = res.data
+      userStore.userdata = res.data
     })
     .catch((err) => {
       console.log("LOAD FAILED")

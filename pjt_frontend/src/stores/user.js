@@ -9,6 +9,7 @@ export const useUserStore = defineStore('user', () => {
   const URL = ref('http://127.0.0.1:8000')
   const token = ref(null)
   const userId = ref(null)
+  const userdata = ref(null)
   const router = useRouter()
 
   const getUserInfo = function() {
@@ -59,6 +60,7 @@ export const useUserStore = defineStore('user', () => {
     URL,
     token,
     userId,
+    userdata,
     login,
     logout,
     getUserInfo

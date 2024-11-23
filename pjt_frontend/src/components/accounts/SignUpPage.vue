@@ -8,17 +8,17 @@
         <form @submit.prevent="signup">
           <div>
             <label for="email">email</label>
-            <input type="text" id="email" v-model.trim="email">
+            <input type="email" id="email" v-model.trim="email">
           </div>
 
           <div>
             <label for="password1">password1</label>
-            <input type="text" id="password1" v-model.trim="password1">
+            <input type="password" id="password1" v-model.trim="password1">
           </div>
 
           <div>
             <label for="password2">password2</label>
-            <input type="text" id="password2" v-model.trim="password2">
+            <input type="password" id="password2" v-model.trim="password2">
 
           </div>
 
@@ -29,7 +29,7 @@
 
           <div>
             <label for="age">age</label>
-            <input type="text" id="age" v-model.trim="age">
+            <input type="number" id="age" v-model.trim="age">
           </div>
 
           <div>
@@ -48,8 +48,8 @@
           </div>
 
           <div>
-            <label for="job_id">job_id</label>
-            <input type="text" id="job_id" v-model.trim="job_id">
+            <label for="job">job</label>
+            <input type="text" id="job" v-model.trim="job">
           </div>
 
           <input type="submit" value="가입하기">
@@ -60,7 +60,6 @@
 </template>
 
 <script setup>
-import { useDepositStore } from '@/stores/deposit';
 import { useUserStore } from '@/stores/user';
 import axios from 'axios';
 import { computed, ref } from 'vue';
@@ -78,7 +77,7 @@ const age = ref('')
 const gender = ref('')
 const birthday = ref('')
 const address = ref('')
-const job_id = ref('')
+const job = ref('')
 
 
 const signup = function () {
@@ -90,11 +89,11 @@ const signup = function () {
       password1: password1.value,
       password2: password2.value,
       name: name.value,
-      age: Number(age.value),
+      age: age.value,
       gender: gender.value,
       birthday: birthday.value,
       address: address.value,
-      job_id: Number(job_id.value),
+      job: job.value,
     }
   })
     .then((res) => {

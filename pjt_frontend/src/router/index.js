@@ -117,7 +117,7 @@ const router = createRouter({
           component: () => import('@/components/profile/ProfilePersonInfoChange.vue'),
         },
         {
-          path: 'person/pw',
+          path: 'person/pwchange',
           name: 'pwchange',
           component: () => import('@/components/profile/ProfilePwChange.vue')
         },
