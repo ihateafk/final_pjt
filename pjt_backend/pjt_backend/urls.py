@@ -20,9 +20,8 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # login and signup
-    path('accounts/', include('dj_rest_auth.urls')),
-    path('accounts/signup/', include('dj_rest_auth.registration.urls')),
+    # accounts
+    path('accounts/', include('accounts.urls')),
     # board
     path('boards/', include('board.urls')),
     # finance

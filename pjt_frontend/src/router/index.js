@@ -98,20 +98,16 @@ const router = createRouter({
           path: 'person',
           name: 'person',
           component: () => import('@/components/profile/ProfilePerson.vue'),
-          children: [
-            {
-              path: 'change',
-              name: 'infochange',
-              component: () => import('@/components/profile/ProfilePersonInfoChange.vue'),
-              children: [
-                {
-                  path: 'pw',
-                  name: 'pwchange',
-                  component: () => import('@/components/profile/ProfilePwChange.vue')
-                },
-              ]
-            },
-          ]
+        },
+        {
+          path: 'person/change',
+          name: 'infochange',
+          component: () => import('@/components/profile/ProfilePersonInfoChange.vue'),
+        },
+        {
+          path: 'person/pw',
+          name: 'pwchange',
+          component: () => import('@/components/profile/ProfilePwChange.vue')
         },
       ],
 
