@@ -6,16 +6,14 @@
         v-for="article in store.articles"
         :key="article.pk"
     >
-      <p> 작성자 : {{ article.user.name }} </p>
-      <p> 제목 : {{ article.title }}</p>
-      <p> 내용 : {{ article.content }} </p>
-      <hr>
+      <BoardListItem :article="article"/>
     </div>
 </template>
 
 <script setup>
     import { onMounted } from 'vue'
     import { useBoardsStore } from '@/stores/boards'
+    import BoardListItem from '@/components/boards/BoardListItem.vue'
     
     const store = useBoardsStore()
 
