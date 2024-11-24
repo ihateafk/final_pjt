@@ -15,11 +15,18 @@
             <p class="text-secondary mb-0">{{ store.savingsItem.kor_co_nm }}</p>
           </div>
           <button
-            v-if="userStore.token"
+            v-if="userStore.token && !addedfavor"
             @click="addProduct('favorite')" 
             class="btn btn-outline-primary btn-sm"
           >
             <i class="bi bi-star me-1"></i>관심상품 등록
+          </button>
+          <button
+            v-else-if="userStore.token && addedfavor"
+            @click="deleteProductfromList('favorite')" 
+            class="btn btn-outline-primary btn-sm"
+          >
+            <i class="bi bi-star me-1"></i>관심상품 삭제
           </button>
         </div>
       </div>
@@ -69,11 +76,18 @@
       <!-- 가입하기 버튼 -->
       <div class="card-footer bg-white border-top p-4">
         <button
-          v-if="userStore.token"
+          v-if="userStore.token && !addedjoin"
           @click="addProduct('join')" 
           class="btn btn-primary w-100"
         >
           가입한 상품 추가하기
+        </button>
+        <button
+          v-else-if="userStore.token && addedjoin"
+          @click="deleteProductfromList('join')" 
+          class="btn btn-primary w-100"
+        >
+          가입한 상품 삭제하기
         </button>
       </div>
     </div>
@@ -83,7 +97,7 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 import { useSavingsStore } from '@/stores/savings';
-import { ref } from 'vue';
+import { onBeforeMount, ref } from 'vue';
 import { useUserStore } from '@/stores/user';
 import axios from 'axios';
 
@@ -92,6 +106,9 @@ const userStore = useUserStore()
 
 const max_intr_rate = ref(0)
 const min_intr_rate = ref(100)
+const addedfavor = ref(false)
+const addedjoin = ref(false)
+const product_id = ref(null)
 
 store.savingsOptionList.forEach((option) => {
   if (option.intr_rate2 > max_intr_rate.value) {
@@ -119,7 +136,9 @@ const addProduct = function (which) {
     }
   })
     .then((res) => {
+      console.log('ADD SUCCESS')
       console.log(res)
+      getproductdata(which)
     })
     .catch((err) => {
       console.log(err.response.data)
@@ -133,18 +152,58 @@ const addProduct = function (which) {
         Authorization: `Token ${userStore.token}`,
       },
       data: {
-        product_id: props.productdata.id
+        product_id: product_id.value
       }
     })
       .then((res) => {
+        console.log('DELETE SUCCESS')
         console.log(res)
-        emit('refreshdata')
+        getproductdata(which)
       })
       .catch((err) => {
         console.log(err.response.data)
       })
   }
 }
+
+const getproductdata = function (which) {
+  axios({
+    method: 'get',
+    url: `${userStore.URL}/finance/product/${which}/`,
+    headers: {
+      Authorization: `Token ${userStore.token}`,
+    },
+  })
+    .then((res) => {
+      console.log("LOAD SUCCESS")
+      console.log(res.data)
+      if (which === 'favorite') {
+        addedfavor.value = res.data.filter((product) => {
+          if (product.fin_prdt_cd === store.depositItem.fin_prdt_cd) {
+            product_id.value = product.id
+            return true
+          }
+        }).length
+      }
+      if (which === 'join') {
+        addedjoin.value = res.data.filter((product) => {
+          if (product.fin_prdt_cd === store.depositItem.fin_prdt_cd) {
+            product_id.value = product.id
+            return true
+          }
+        }).length
+      }
+    })
+    .catch((err) => {
+      console.log("LOAD FAILED")
+      console.log(err.response.data)
+    })
+}
+
+onBeforeMount(() => {
+  getproductdata('favorite')
+  getproductdata('join')
+})
 </script>
 
 <style scoped>
