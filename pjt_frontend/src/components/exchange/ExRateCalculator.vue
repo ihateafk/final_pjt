@@ -1,30 +1,45 @@
 <template>
-  <div class="exchange-container">
-    <div class="exchange-input">
-      <p>
-        <label>변환 전:</label>
-        <select v-model="originCountry">
-          <option v-for="code in countryCodes" :key="code" :value="code">
-            {{ code }}
-          </option>
-        </select>
-      </p>
-      <p>
-        <label>가격 : </label>
-        <input type="number" v-model="originValue">
-      </p>
-      <p>
-        <label>변환 후: </label>
-        <select v-model="changeCountry">
-          <option v-for="code in countryCodes" :key="code" :value="code">
-            {{ code }}
-          </option>
-        </select>
-      </p>
-    </div>
-    
-    <div class="exchange-result">
-      <p>{{ exchangeResult }} {{ changeCountry }}</p>
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="exchange-container p-4">
+          <div class="exchange-header mb-4">
+            <h4 class="text-center">환율 계산기</h4>
+          </div>
+          <div class="exchange-input">
+            <div class="form-group row">
+              <label for="originCountry" class="col-3 col-form-label">변환 전</label>
+              <div class="col-9">
+                <select class="form-control" v-model="originCountry">
+                  <option v-for="code in countryCodes" :key="code" :value="code">
+                    {{ code }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="originValue" class="col-3 col-form-label">가격</label>
+              <div class="col-9">
+                <input type="number" class="form-control" v-model="originValue">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="changeCountry" class="col-3 col-form-label">변환 후</label>
+              <div class="col-9">
+                <select class="form-control" v-model="changeCountry">
+                  <option v-for="code in countryCodes" :key="code" :value="code">
+                    {{ code }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <div class="exchange-result text-center display-5 bg-light p-3 rounded">
+            {{ exchangeResult }} {{ changeCountry }}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>

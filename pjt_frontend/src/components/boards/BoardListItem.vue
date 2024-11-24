@@ -1,38 +1,84 @@
 <template>
-    <div>
-        <RouterLink
-            :to="{name: 'boardsDetail', params : {id : article.id} }"
-            @click="articleItemChange"
-        >
-            <p>{{ article.user.name }}</p>
-            <p>{{ article.title }}</p>
-            <p>{{ article.content }}</p>
-            
-        </RouterLink>
-        <p>댓글 수 : {{ article.comment_count }}</p>
-        <hr>
-    </div>
-
-</template>
-
-<script setup>
-    import { defineProps } from 'vue'
-    import { RouterLink } from 'vue-router'
-    import { useBoardsStore } from '@/stores/boards'
-
-    const boardStore = useBoardsStore()
-
-    const props = defineProps({
-        article : Object
-    })
-
-    const articleItemChange = async function () {
-        boardStore.articleItem = props.article
-        await boardStore.getComments(props.article.id)
+    <RouterLink
+      :to="{ name: 'boardsDetail', params: { id: article.id } }"
+      @click="articleItemChange"
+      class="text-decoration-none w-100"
+    >
+      <div class="d-flex justify-content-between align-items-center">
+        <!-- 왼쪽 텍스트 영역 -->
+        <div class="flex-grow-1 d-flex align-items-center gap-3">
+          <h6 class="article-title mb-0">{{ article.title }}</h6>
+          <span class="author-name">{{ article.user.name }}</span>
+        </div>
+        
+        <!-- 오른쪽 댓글 수 표시 -->
+        <div class="d-flex align-items-center comment-section">
+          <span class="comment-count">
+            댓글 {{ article.comment_count }}
+          </span>
+          <i class="bi bi-chevron-right ms-2"></i>
+        </div>
+      </div>
+    </RouterLink>
+  </template>
+  
+  <script setup>
+  import { defineProps } from 'vue'
+  import { RouterLink } from 'vue-router'
+  import { useBoardsStore } from '@/stores/boards'
+  
+  const boardStore = useBoardsStore()
+  
+  const props = defineProps({
+    article: Object
+  })
+  
+  const articleItemChange = async function () {
+    boardStore.articleItem = props.article
+    await boardStore.getComments(props.article.id)
+  }
+  </script>
+  
+  <style scoped>
+  .author-name {
+    font-size: 0.875rem;
+    color: #666;
+  }
+  
+  .article-title {
+    color: #333;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  
+  .comment-section {
+    color: #666;
+  }
+  
+  .comment-count {
+    font-size: 0.875rem;
+  }
+  
+  /* hover 상태일 때 부모 컴포넌트의 스타일과 조화를 이루도록 조정 */
+  :deep(.board-item:hover) {
+    .article-title {
+      color: #000;
     }
-
-</script>
-
-<style scoped>
-
-</style>
+  
+    .comment-section {
+      color: #444;
+    }
+  }
+  
+  /* 반응형 조정 */
+  @media (max-width: 768px) {
+    .article-title {
+      font-size: 0.9rem;
+    }
+    
+    .author-name, 
+    .comment-count {
+      font-size: 0.8rem;
+    }
+  }
+  </style>

@@ -3,12 +3,23 @@
     <div class="position-relative" style="height: 500px;">
       <!-- 지도를 담을 영역 -->
       <div id="map" style="width: 100%; height: 100%; position: absolute; left: 0px; top: 0px;"></div>
+      <!-- 검색 결과 목록 토글 버튼 -->
+      <button v-if="searchData.province && places.length > 0 && !showResultList"
+              @click="toggleResultList"
+              class="btn btn-primary position-absolute"
+              style="top: 10px; right: 10px; z-index: 2;">
+        목록 열기
+      </button>
       <!-- 검색 결과 목록 -->
-      <div v-if="searchData.province && places.length > 0" 
-           style="position: absolute; top: 0; right: 0; width: 350px; max-height: calc(100% - 20px); overflow-y: auto; margin: 10px; background: white; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); z-index: 2;">
+      <div v-if="searchData.province && places.length > 0 && showResultList"
+           style="position: absolute; top: 0; right: 0; width: 350px; max-height: 100%; overflow-y: auto; margin: 10px; background: white; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); z-index: 2;">
         <div class="p-3">
+          <div class="d-flex justify-content-between align-items-center mb-2 position-sticky top-0 bg-white py-2" style="z-index: 1;">
+            <h5 class="mb-0">검색 결과</h5>
+            <button @click="toggleResultList" class="btn btn-sm btn-secondary">닫기</button>
+          </div>
           <ul class="list-unstyled mb-0">
-            <li v-for="(place, index) in places" 
+            <li v-for="(place, index) in places"
                 :key="index"
                 class="border-bottom p-2 cursor-pointer"
                 @click="moveToPlace(place, markers[index])"
@@ -44,6 +55,11 @@ const markers = ref([])
 const infowindow = ref(null)
 const places = ref([])
 const ps = ref(null)
+const showResultList = ref(false)
+
+const toggleResultList = () => {
+  showResultList.value = !showResultList.value
+}
 
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수
 const addMarker = (position, idx, place) => {

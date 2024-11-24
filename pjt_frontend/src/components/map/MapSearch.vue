@@ -1,61 +1,60 @@
 <template>
   <div>
-    <h2 class="text-xl mb-4">지역 검색</h2>
+    <h5 class="mb-4">지역 검색</h5>
 
-    <div class="space-y-4">
-      <div class="flex items-center gap-4">
-        <label class="min-w-24">광역시/도:</label>
-        <select 
-          v-model="selectedProvince" 
-          class="border p-2 rounded min-w-48"
+    <div class="mb-3">
+      <label class="form-label">광역시/도</label>
+      <select 
+        v-model="selectedProvince" 
+        class="form-select"
+      >
+        <option value="" disabled>선택하세요</option>
+        <option 
+          v-for="province in mapStore.mapInfo" 
+          :key="province.id" 
+          :value="province.prov"
         >
-          <option value="" disabled>선택하세요</option>
-          <option 
-            v-for="province in mapStore.mapInfo" 
-            :key="province.id" 
-            :value="province.prov"
-          >
-            {{ province.prov }}
-          </option>
-        </select>
-      </div>
-
-      <div class="flex items-center gap-4">
-        <label class="min-w-24">시/군/구:</label>
-        <select 
-          v-model="selectedCity"
-          class="border p-2 rounded min-w-48"
-          :disabled="!selectedProvince"
-        >
-          <option value="" disabled>선택하세요</option>
-          <option 
-            v-for="city in cityList" 
-            :key="city" 
-            :value="city"
-          >
-            {{ city }}
-          </option>
-        </select>
-      </div>
-
-      <div class="flex items-center gap-4">
-        <label class="min-w-24">은행명:</label>
-        <select 
-          v-model="selectedBank" 
-          class="border p-2 rounded min-w-48"
-        >
-          <option value="" disabled>선택하세요</option>
-          <option 
-            v-for="bank in mapStore.bankInfo" 
-            :key="bank" 
-            :value="bank"
-          >
-            {{ bank }}
-          </option>
-        </select>
-      </div>
+          {{ province.prov }}
+        </option>
+      </select>
     </div>
-    <button @click="handleSearch">
+
+    <div class="mb-3">
+      <label class="form-label">시/군/구</label>
+      <select 
+        v-model="selectedCity"
+        class="form-select"
+        :disabled="!selectedProvince"
+      >
+        <option value="" disabled>선택하세요</option>
+        <option 
+          v-for="city in cityList" 
+          :key="city" 
+          :value="city"
+        >
+          {{ city }}
+        </option>
+      </select>
+    </div>
+
+    <div class="mb-4">
+      <label class="form-label">은행명</label>
+      <select 
+        v-model="selectedBank" 
+        class="form-select"
+      >
+        <option value="" disabled>선택하세요</option>
+        <option 
+          v-for="bank in mapStore.bankInfo" 
+          :key="bank" 
+          :value="bank"
+        >
+          {{ bank }}
+        </option>
+      </select>
+    </div>
+
+    <button class="btn btn-primary w-100 text-center" @click="handleSearch">
       검색
     </button>
   </div>

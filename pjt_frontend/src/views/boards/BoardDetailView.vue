@@ -1,49 +1,70 @@
 <template>
-    <RouterLink :to="{ name: 'board' }">뒤로가기</RouterLink>
-    <div>
-        <p>{{ boardStore.articleItem?.user?.name }}</p>
-        <p>{{ boardStore.articleItem?.title }}</p>
-        <p>{{ boardStore.articleItem?.content }}</p>
-        <p>{{ boardStore.articleItem?.created_at }}</p>
+    <div class="container py-4">
+        <RouterLink :to="{ name: 'board' }" class="back-link text-decoration-none">
+            <i class="bi bi-arrow-left me-2"></i>뒤로가기
+        </RouterLink>
+        
+        <div class="content-section bg-white rounded p-4 my-4">
+            <div class="mb-4">
+                <h5 class="mb-3">{{ boardStore.articleItem?.title }}</h5>
+                <div class="d-flex justify-content-between align-items-center text-secondary small">
+                    <span>{{ boardStore.articleItem?.user?.name }}</span>
+                    <span>{{ boardStore.articleItem?.created_at }}</span>
+                </div>
+            </div>
 
-        <div v-if="boardStore.isAuthor">
-            <RouterLink
-                :to="{
-                    name: 'boardUpdate',
-                    params: { boardId: boardStore.articleItem.id }
-                }"
-            >
-                수정
-            </RouterLink>
-            <button @click="isDelete">삭제</button>
+            <p class="content-text mb-4">{{ boardStore.articleItem?.content }}</p>
+
+            <div v-if="boardStore.isAuthor" class="d-flex gap-2 justify-content-end">
+                <RouterLink
+                    :to="{
+                        name: 'boardUpdate',
+                        params: { boardId: boardStore.articleItem.id }
+                    }"
+                    class="btn btn-outline-secondary btn-sm"
+                >
+                    수정
+                </RouterLink>
+                <button @click="isDelete" class="btn btn-outline-danger btn-sm">삭제</button>
+            </div>
         </div>
-    </div>
 
-    <div class="comments-section">
-        <h3>댓글 ({{ boardStore.comments.length }})</h3>
-        <div class="comment-form" v-if="userStore.token !== null">
-            <textarea 
-                v-model="commentContent" 
-                placeholder="댓글을 입력하세요"
-                rows="3"
-            ></textarea>
-            <button @click="submitComment">댓글 작성</button>
-        </div>
+        <div class="comments-section bg-white rounded p-4">
+            <h6 class="mb-3">댓글 ({{ boardStore.comments.length }})</h6>
+            
+            <div class="comment-form mb-4" v-if="userStore.token !== null">
+                <textarea 
+                    v-model="commentContent" 
+                    placeholder="댓글을 입력하세요"
+                    rows="3"
+                    class="form-control mb-2"
+                ></textarea>
+                <div class="d-flex justify-content-end">
+                    <button @click="submitComment" class="btn btn-primary btn-sm">댓글 작성</button>
+                </div>
+            </div>
 
-        <div class="comments-list">
-            <div 
-                v-for="comment in boardStore.comments" 
-                :key="comment.id" 
-                class="comment-item"
-            >
-                <p class="comment-author">{{ comment.user?.name }}</p>
-                <p class="comment-content">{{ comment.comment }}</p>
+            <div class="comments-list">
+                <div 
+                    v-for="comment in boardStore.comments" 
+                    :key="comment.id" 
+                    class="comment-item d-flex gap-3 py-3 border-bottom"
+                >
+                    <div class="profile-image">
+                        <i class="bi bi-person-circle fs-4 text-secondary"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                        <p class="comment-author mb-1">{{ comment.user?.name }}</p>
+                        <p class="comment-content mb-0">{{ comment.comment }}</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
+// 스크립트 부분은 그대로 유지
 import { computed, onMounted, watch, ref } from 'vue'
 import { useBoardsStore } from '@/stores/boards'
 import { useRouter } from 'vue-router'
@@ -54,74 +75,90 @@ const boardStore = useBoardsStore()
 const userStore = useUserStore()
 const commentContent = ref('')
 
-// 댓글 작성 함수
 const submitComment = async () => {
-    if (!commentContent.value.trim()) return  // 공백일 경우 작성하지 않음
-    
-    await boardStore.createComment(commentContent.value)  // 댓글 작성
-    commentContent.value = ''  // 작성 후 입력창 초기화
+    if (!commentContent.value.trim()) return
+    await boardStore.createComment(commentContent.value)
+    commentContent.value = ''
 }
 
-// 게시글과 댓글을 불러오는 함수
 const loadArticle = async () => {
     const boardId = router.currentRoute.value.params.boardId
     if (boardId) {
-        await boardStore.getArticleDetail(boardId)  // 게시글 상세 가져오기
-        await boardStore.getComments(boardId)  // 해당 게시글의 댓글 목록 가져오기
+        await boardStore.getArticleDetail(boardId)
+        await boardStore.getComments(boardId)
     }
 }
 
-// URL 파라미터로 boardId가 변경될 때마다 게시글과 댓글을 불러오기
 watch(
     () => router.currentRoute.value.params.boardId,
     (newBoardId) => {
         if (newBoardId) {
-            loadArticle()  // 새로운 boardId에 대해 게시글과 댓글을 다시 불러옴
+            loadArticle()
         }
     },
-    { immediate: true }  // 최초에 한 번 호출
+    { immediate: true }
 )
 
 onMounted(async () => {
-    await userStore.getUserInfo()  // 사용자 정보 로드
+    await userStore.getUserInfo()
 })
 
-// 게시글 삭제 함수
 const isDelete = () => {
-    boardStore.deleteArticle(boardStore.articleItem.id)  // 게시글 삭제
+    boardStore.deleteArticle(boardStore.articleItem.id)
 }
 </script>
 
 <style scoped>
-.comments-section {
-    margin-top: 2rem;
-    padding: 1rem;
-    border-top: 1px solid #eee;
+.container {
+    max-width: 768px;
 }
 
-.comment-form {
-    margin-bottom: 1rem;
+.back-link {
+    color: #333;
+    display: inline-flex;
+    align-items: center;
+}
+
+.content-section {
+    border: 1px solid #eee;
+}
+
+.content-text {
+    white-space: pre-wrap;
+    color: #333;
+    line-height: 1.6;
+}
+
+.comments-section {
+    border: 1px solid #eee;
 }
 
 .comment-form textarea {
-    width: 100%;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    resize: none;
+    border-color: #dee2e6;
 }
 
-.comment-item {
-    padding: 1rem;
-    border-bottom: 1px solid #eee;
+.comment-form textarea:focus {
+    box-shadow: none;
+    border-color: #86b7fe;
 }
 
 .comment-author {
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
 }
 
 .comment-content {
+    font-size: 0.9rem;
+    color: #666;
     white-space: pre-wrap;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
 }
 </style>
