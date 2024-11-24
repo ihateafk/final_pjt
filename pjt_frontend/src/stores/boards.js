@@ -9,6 +9,7 @@ export const useBoardsStore = defineStore('boards', () => {
     
     const articles = ref([])
     const articleItem = ref(null)
+    const comments = ref([])
 
     const router = useRouter()
 
@@ -59,6 +60,9 @@ export const useBoardsStore = defineStore('boards', () => {
     const getArticleDetail = function (boardId) {
         if (!boardId) return
         
+        // 데이터 초기화
+        articleItem.value = null
+        
         return axios({
             method: 'GET',
             url: `${userStore.URL}/boards/${boardId}/`,
@@ -68,7 +72,8 @@ export const useBoardsStore = defineStore('boards', () => {
         })
         .then((res) => {
             articleItem.value = res.data
-            
+            // 게시글을 가져온 후 바로 해당 게시글의 댓글을 가져옴
+            getComments(boardId)
             return res.data
         })
         .catch((err) => {
@@ -132,5 +137,54 @@ export const useBoardsStore = defineStore('boards', () => {
         }
     }
 
-    return { articles, getArticles, createArticle, isLogin, articleItem, updateArticle, deleteArticle, getArticleDetail, isAuthor }
+    const createComment = function (comment) {
+        if (!articleItem.value) return
+    
+        axios({
+            method: 'POST',
+            url: `${userStore.URL}/boards/${articleItem.value.id}/comments/`,
+            data: {
+                comment: comment
+            },
+            headers: {
+                Authorization: `Token ${userStore.token}`
+            }
+        })
+        .then((res) => {
+            // 댓글 작성 후 해당 게시글의 댓글 목록을 다시 불러옴
+            getComments(articleItem.value.id)
+        })
+        .catch((err) => {
+            console.log(err)
+            if (err.response && err.response.status === 401) {
+                alert('로그인이 필요합니다.')
+            } else {
+                alert('댓글 작성 중 오류가 발생했습니다.')
+            }
+        })
+    }
+
+    const getComments = function (boardId) {
+        if (!boardId) return
+    
+        // 댓글 데이터 초기화
+        comments.value = []
+    
+        axios({
+            method: 'GET',
+            url: `${userStore.URL}/boards/${boardId}/comment/`,  // boardId를 URL에 추가
+            headers: {
+                Authorization: `Token ${userStore.token}`
+            }
+        })
+        .then((res) => {
+            comments.value = res.data
+            console.log('댓글 데이터:', res.data)  // 데이터 확인용
+        })
+        .catch((err) => {
+            console.log('댓글 조회 에러:', err)
+        })
+    }
+
+    return { articles, getArticles, createArticle, isLogin, articleItem, updateArticle, deleteArticle, getArticleDetail, isAuthor, createComment, comments, getComments }
 }, {persist : true},)

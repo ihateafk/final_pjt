@@ -7,7 +7,9 @@
             <p>{{ article.user.name }}</p>
             <p>{{ article.title }}</p>
             <p>{{ article.content }}</p>
+            
         </RouterLink>
+        <p>댓글 수 : {{ article.comment_count }}</p>
         <hr>
     </div>
 
@@ -24,8 +26,9 @@
         article : Object
     })
 
-    const articleItemChange = function () {
+    const articleItemChange = async function () {
         boardStore.articleItem = props.article
+        await boardStore.getComments(props.article.id)
     }
 
 </script>
