@@ -8,7 +8,14 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from .models import Company, Product, FinCategory, FavoriteProduct, JoinProduct
 from .serializers import CompanySerializer, ProductAddSerializer, OptionAddSerializer, favoriteProductSerializer, JoinProductSerializer,ProductDetailSerializer
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import font_manager, rc
+from io import BytesIO
+import base64
 from .utils import addProductAndOptions
+from pprint import pprint
 
 
 # Create your views here.
@@ -104,6 +111,42 @@ def joinProduct(request):
         product = JoinProduct.objects.get(user_id=request.user.pk, product_id=request.data['product_id'])
         product.delete()
         return Response({ 'data': 'Delete data success'}, status=status.HTTP_204_NO_CONTENT)
+
+
+# 가입상품 금리 비교 그래프
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+def drawgraph(request):
+    if request.method == 'POST':
+        products = request.data['joinproducts']
+        data = {}
+        max_intr_rate2 = 0
+        max_intr_rate = 0
+        for product in products:
+            for option in product['options']:
+                if option['intr_rate2'] > max_intr_rate2:
+                    max_intr_rate2 = option['intr_rate2']
+                if option['intr_rate'] > max_intr_rate:
+                    max_intr_rate = option['intr_rate']
+            data[product['fin_prdt_nm']] = {
+                'max_intr_rate': max_intr_rate,
+                'max_intr_rate2': max_intr_rate2,
+            }
+        df = pd.DataFrame.from_dict(data, orient='index')
+        fig, ax = plt.subplot(figsize=(12, 6))
+        bar_width = 0.25
+        index = np.arange(len(data))
+        
+        b1 = plt.bar(index, df['max_intr_rate'], bar_width, alpha=0.4, color='red', label='최고 금리')
+        b2 = plt.bar(index + bar_width, df['max_intr_rate2'], bar_width, alpha=0.4, color='blue', label='최고 우대 금리')
+
+        plt.xticks(np.arange(bar_width, 4 + bar_width, 1), data.keys())
+
+        plt.xlabel('상품명', size = 13)
+        plt.ylabel('금리 (%)', size=13)
+        plt.legend()
+        plt.show()
+        return Response(df)
 
 
 # # 예금 목록 불러와서 상품 DB에 저장하는 view

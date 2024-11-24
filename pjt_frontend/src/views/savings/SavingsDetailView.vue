@@ -86,6 +86,26 @@
         console.log(err.response.data)
       })
   }
+
+  const deleteProductfromList = function (which) {
+  axios({
+    method: 'delete',
+    url: `${userStore.URL}/finance/product/${which}/`,
+    headers: {
+      Authorization: `Token ${userStore.token}`,
+    },
+    data: {
+      product_id: props.productdata.id
+    }
+  })
+    .then((res) => {
+      console.log(res)
+      emit('refreshdata')
+    })
+    .catch((err) => {
+      console.log(err.response.data)
+    })
+}
 </script>
 
 <style scoped>

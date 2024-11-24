@@ -1,17 +1,76 @@
 <template>
   <div>
-    <div id="subslist">
-      <div>가입상품</div>
-      <div>가입상품 리스트 아이템들</div>
+    <div id="joinlist">
+      <div id="title">가입상품</div>
+      <div id="prdt-content">
+        <div v-for="product in joinproducts">
+          {{ product.fin_prdt_nm }}
+        </div>
+      </div>
     </div>
-    <div id="graph">
-      그래프
+    <div id="rate-graph">
+      <div v-if="graph">
+        <img :src="graph" alt="intr_rate graph">
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import { useUserStore } from '@/stores/user';
+import axios from 'axios';
+import { onBeforeMount, ref, watch } from 'vue';
 
+const userStore = useUserStore()
+
+const joinproducts = ref('')
+const graph = ref(null)
+
+const getGraph = function () {
+  axios({
+    method: 'post',
+    url: `${userStore.URL}/finance/product/graph/`,
+    headers: {
+      Authorization: `Token ${userStore.token}`,
+    },
+    data: {
+      'joinproducts': joinproducts.value,
+    },
+  })
+    .then((res) => {
+      console.log("GRAPH LOAD SUCCESS")
+      console.log(res.data)
+      graph.value = res.data
+    })
+    .catch((err) => {
+      console.log("GRAPH LOAD FAILED")
+      console.log(err.response.data)
+    })
+}
+
+const getproductdata = function (which) {
+  axios({
+    method: 'get',
+    url: `${userStore.URL}/finance/product/${which}/`,
+    headers: {
+      Authorization: `Token ${userStore.token}`,
+    },
+  })
+    .then((res) => {
+      console.log("LOAD SUCCESS")
+      joinproducts.value = res.data
+      console.log(joinproducts.value)
+      // getGraph()
+    })
+    .catch((err) => {
+      console.log("LOAD FAILED")
+      console.log(err.response.data)
+    })
+}
+
+onBeforeMount(() => {
+  getproductdata('join')
+})
 </script>
 
 <style lang="css" scoped>

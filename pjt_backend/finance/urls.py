@@ -6,5 +6,6 @@ urlpatterns = [
     path('company/create/', views.companyload),
     # path('/deposit/create/', views.depositload),
     path('product/favorite/', views.favoriteProduct),
-    path('product/join/', views.joinProduct)
+    path('product/join/', views.joinProduct),
+    path('product/graph/', views.drawgraph),
 ]
