@@ -14,11 +14,19 @@
             <h5 class="mb-2">{{ store.depositItem.fin_prdt_nm }}</h5>
             <p class="text-secondary mb-0">{{ store.depositItem.kor_co_nm }}</p>
           </div>
-          <button 
+          <button
+            v-if="userStore.token && !addedfavor"
             @click="addProduct('favorite')" 
             class="btn btn-outline-primary btn-sm"
           >
             <i class="bi bi-star me-1"></i>관심상품 등록
+          </button>
+          <button
+            v-else-if="userStore.token && addedfavor"
+            @click="deleteProductfromList('favorite')" 
+            class="btn btn-outline-primary btn-sm"
+          >
+            <i class="bi bi-star me-1"></i>관심상품 삭제
           </button>
         </div>
       </div>
@@ -67,11 +75,19 @@
  
       <!-- 가입하기 버튼 -->
       <div class="card-footer bg-white border-top p-4">
-        <button 
+        <button
+          v-if="userStore.token && !addedjoin"
           @click="addProduct('join')" 
           class="btn btn-primary w-100"
         >
           가입한 상품 추가하기
+        </button>
+        <button
+          v-else-if="userStore.token && addedjoin"
+          @click="deleteProductfromList('join')" 
+          class="btn btn-primary w-100"
+        >
+          가입한 상품 삭제하기
         </button>
       </div>
     </div>
@@ -90,6 +106,11 @@
  
  const max_intr_rate = ref(0)
  const min_intr_rate = ref(100)
+ const favorite_data = ref([])
+ const join_data = ref([])
+ const addedfavor = ref(false)
+ const addedjoin = ref(false)
+ const product_id = ref(null)
  
  store.depositOptionList.forEach((option) => {
   if (option.intr_rate2 > max_intr_rate.value) {
@@ -117,7 +138,8 @@
     }
   })
     .then((res) => {
-      console.log(res)
+      console.log('ADD SUCCESS')
+      is_added(which)
     })
     .catch((err) => {
       console.log(err.response.data)
@@ -125,24 +147,89 @@
  }
 
  const deleteProductfromList = function (which) {
-  axios({
-    method: 'delete',
-    url: `${userStore.URL}/finance/product/${which}/`,
-    headers: {
-      Authorization: `Token ${userStore.token}`,
-    },
-    data: {
-      product_id: props.productdata.id
+  return axios({
+      method: 'delete',
+      url: `${userStore.URL}/finance/product/${which}/`,
+      headers: {
+        Authorization: `Token ${userStore.token}`,
+      },
+      data: {
+        product_id: product_id.value
+      }
+    })
+      .then((res) => {
+        console.log('DELETE SUCCESS')
+        is_added(which)
+      })
+      .catch((err) => {
+        console.log(err.response.data)
+      })
     }
-  })
-    .then((res) => {
-      console.log(res)
-      emit('refreshdata')
+
+    const getProductList = function (which) {
+    axios({
+      method: 'get',
+      url: `${userStore.URL}/finance/product/${which}/`,
+      headers: {
+        Authorization: `Token ${userStore.token}`,
+      },
     })
-    .catch((err) => {
-      console.log(err.response.data)
-    })
+      .then((res) => {
+        console.log("LOAD SUCCESS")
+        if (which === 'favorite') {
+          favorite_data.value = res.data
+        } else if (which === 'join') {
+          join_data.value = res.data
+        }
+        console.log('favor')
+        console.log(favorite_data.value)
+        console.log('join')
+        console.log(join_data.value)
+        console.log(store.depositItem.fin_prdt_cd)
+      })
+      .catch((err) => {
+        console.log("LOAD FAILED")
+        console.log(err.response.data)
+      })
 }
+
+  const is_added = async function (which) {
+    await getProductList(which)
+    if (which === 'favorite') {
+      // addedfavor.value = favorite_data.value.filter((product) => {
+      //   if (product.fin_prdt_cd === store.depositItem.fin_prdt_cd) {
+      //     product_id.value = product.id
+      //     return true
+      //   } else {
+      //     return false
+      //   }
+      // })
+      for (const product of favorite_data.value) {
+        console.log(product); // 각 데이터 객체를 출력
+        if (product.fin_prdt_cd === store.depositItem.fin_prdt_cd) {
+          product_id.value = product.id;
+          addedfavor.value = true;
+          break; // 일치하는 항목을 찾으면 반복문 종료
+        }
+      }
+    } else if (which === 'join') {
+      // addedjoin.value = join_data.value.filter((product) => {
+      //   if (product.fin_prdt_cd === store.depositItem.fin_prdt_cd) {
+      //     product_id.value = product.id
+      //     return true
+      //   } else {
+      //     return false
+      //   }
+      // })
+    }
+    console.log(addedjoin.value)
+    console.log(addedfavor.value)
+  }
+  
+  onBeforeMount(async () => {
+    await is_added('favorite')
+    await is_added('join')
+  })
  </script>
  
  <style scoped>

@@ -14,7 +14,8 @@
             <h5 class="mb-2">{{ store.savingsItem.fin_prdt_nm }}</h5>
             <p class="text-secondary mb-0">{{ store.savingsItem.kor_co_nm }}</p>
           </div>
-          <button 
+          <button
+            v-if="userStore.token"
             @click="addProduct('favorite')" 
             class="btn btn-outline-primary btn-sm"
           >
@@ -67,7 +68,8 @@
 
       <!-- 가입하기 버튼 -->
       <div class="card-footer bg-white border-top p-4">
-        <button 
+        <button
+          v-if="userStore.token"
           @click="addProduct('join')" 
           class="btn btn-primary w-100"
         >

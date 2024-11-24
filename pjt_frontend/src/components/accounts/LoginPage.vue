@@ -12,7 +12,7 @@
           </div>
           <div>
             <label for="pw">Password</label>
-            <input type="text" id="pw" v-model.trim="pw">
+            <input type="password" id="pw" v-model.trim="pw">
           </div>
           <div>
             <input type="submit" value="Sign In">
@@ -21,7 +21,7 @@
       </div>
       <div id="linkbox">
         <div>
-          <a href=""></a>
+          <RouterLink :to="{ name: 'signup' }">회원이 아니신가요?</RouterLink>
         </div>
         <div>
           <a href=""></a>
@@ -56,7 +56,7 @@ const login = function () {
     .then((res) => {
       userStore.token = res.data.key
       console.log("LOGIN SUCCESS")
-      router.push({ name: 'home' })
+      router.back()
     })
     .catch((err) => {
       console.log('LOGIN FAILED')
