@@ -15,7 +15,7 @@
             </div>
           </div>
           <div id="favorbtn">
-            <button>관심상품 등록</button>
+            <button @click="addProduct('favorite')">관심상품 등록</button>
           </div>
         </div>
         <div id="intrrate">
@@ -36,7 +36,7 @@
       </div>
     </div>
     <div>
-      <button>가입한 상품 추가하기</button>
+      <button @click="addProduct('join')">가입한 상품 추가하기</button>
     </div>
   </div>
 </template>
@@ -45,8 +45,11 @@
   import { RouterLink } from 'vue-router';
   import { useSavingsStore } from '@/stores/savings';
   import { ref } from 'vue';
+  import { useUserStore } from '@/stores/user';
+  import axios from 'axios';
 
   const store = useSavingsStore()
+  const userStore = useUserStore()
 
   const max_intr_rate = ref(0)
   const min_intr_rate = ref(100)
@@ -63,6 +66,26 @@
   max_intr_rate.value = Number.parseFloat(max_intr_rate.value).toFixed(2) + "%"
   min_intr_rate.value = Number.parseFloat(min_intr_rate.value).toFixed(2) + "%"
   
+  const addProduct = function (which) {
+    axios({
+      method: 'post',
+      url: `${userStore.URL}/finance/product/${which}/`,
+      headers: {
+        Authorization: `Token ${userStore.token}`,
+      },
+      data: {
+        fin_category: 1,
+        base: store.savingsItem,
+        options: store.savingsOptionList,
+      }
+    })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err.response.data)
+      })
+  }
 </script>
 
 <style scoped>

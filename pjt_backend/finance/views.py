@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
-from .models import Company, Product, FinCategory
+from .models import Company, Product, FinCategory, FavoriteProduct, JoinProduct
 from .serializers import CompanySerializer, ProductAddSerializer, OptionAddSerializer, favoriteProductSerializer, JoinProductSerializer,ProductDetailSerializer
 from .utils import addProductAndOptions
 
@@ -52,7 +52,14 @@ def companyload(request) :
 @api_view(['GET', 'POST', 'DELETE'])
 @permission_classes([IsAuthenticated])
 def favoriteProduct(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
+        products_pk = FavoriteProduct.objects.filter(user_id=request.user.pk)
+        products = []
+        for product_pk in products_pk:
+            products.append(Product.objects.get(pk=product_pk.product_id))
+        serializer = ProductDetailSerializer(products, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
         # DB에 있는지 없는지 검사해서 상품 및 유저 pk 반환
         data = addProductAndOptions(request.user, request.data)
 
@@ -64,14 +71,24 @@ def favoriteProduct(request):
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-
+    elif request.method == 'DELETE':
+        product = FavoriteProduct.objects.get(user_id=request.user.pk, product_id=request.data['product_id'])
+        product.delete()
+        return Response({ 'data': 'Delete data success'}, status=status.HTTP_204_NO_CONTENT)
 
 
 # 가입 상품 조회 및 추가
 @api_view(['GET', 'POST', 'DELETE'])
 @permission_classes([IsAuthenticated])
 def joinProduct(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
+        products_pk = JoinProduct.objects.filter(user_id=request.user.pk)
+        products = []
+        for product_pk in products_pk:
+            products.append(Product.objects.get(pk=product_pk.product_id))
+        serializer = ProductDetailSerializer(products, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
         # DB에 있는지 없는지 검사해서 상품 및 유저 pk 반환
         data = addProductAndOptions(request.user, request.data)
 
@@ -83,6 +100,10 @@ def joinProduct(request):
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+    elif request.method == 'DELETE':
+        product = JoinProduct.objects.get(user_id=request.user.pk, product_id=request.data['product_id'])
+        product.delete()
+        return Response({ 'data': 'Delete data success'}, status=status.HTTP_204_NO_CONTENT)
 
 
 # # 예금 목록 불러와서 상품 DB에 저장하는 view
