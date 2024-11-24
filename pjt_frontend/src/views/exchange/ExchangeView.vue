@@ -1,6 +1,5 @@
 <template>
   <div>
-    exchange
     <ExRateCalculator/>
   </div>
 </template>

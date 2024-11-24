@@ -1,10 +1,16 @@
 <template>
-  <div>
-    <h1>적금 상품 목록</h1>
-    <div>
-      <input type="text" placeholder="은행명 또는 상품명으로 검색">
+  <div class="container">
+    <h1 class="title">적금 상품 목록</h1>
+    <div class="search-container">
+      <input 
+        type="text" 
+        v-model="searchQuery"
+        placeholder="은행명 또는 상품명으로 검색"
+        class="search-input"
+        @input="handleSearch"
+      >
     </div>
-    <div>
+    <div class="deposit-list">
       <SavingsListItem
         v-for="list in filteredSavingsList"
         :key="list.fin_prdt_cd"
@@ -54,9 +60,55 @@
   onMounted(() => {
     callSavings()
   })
-
 </script>
 
 <style scoped>
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
 
+.title {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #2c3e50;
+}
+
+.search-container {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px 15px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.deposit-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+  
+  .deposit-list {
+    grid-template-columns: 1fr;
+  }
+}
 </style>
