@@ -10,7 +10,7 @@
     </div>
     <div id="rate-graph">
       <div v-if="graph">
-        <img :src="graph" alt="intr_rate graph">
+        <img :src="graph.data" alt="intr_rate graph">
       </div>
     </div>
   </div>
@@ -60,7 +60,7 @@ const getproductdata = function (which) {
       console.log("LOAD SUCCESS")
       joinproducts.value = res.data
       console.log(joinproducts.value)
-      // getGraph()
+      getGraph()
     })
     .catch((err) => {
       console.log("LOAD FAILED")

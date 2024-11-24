@@ -12,6 +12,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import font_manager, rc
+import platform
 from io import BytesIO
 import base64
 from .utils import addProductAndOptions
@@ -101,7 +102,7 @@ def joinProduct(request):
 
         # 레코드 중복 검사
         if request.user.joinproduct_set.filter(product_id=data['product']).exists():
-            return Response(status=status.HTTP_503_SERVICE_UNAVAILABLE)
+            return Response({ 'data': 'This product has been added' }, status=status.HTTP_503_SERVICE_UNAVAILABLE)
         
         serializer = JoinProductSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
@@ -133,20 +134,45 @@ def drawgraph(request):
                 'max_intr_rate2': max_intr_rate2,
             }
         df = pd.DataFrame.from_dict(data, orient='index')
-        fig, ax = plt.subplot(figsize=(12, 6))
+
+        # 한글 깨져서 폰트 바꾸는 코드
+        plt.rc('font', family='Malgun Gothic')
+        # 그림 사이즈, 바 굵기 설정
+        fig, ax = plt.subplots(figsize=(10, 5))
         bar_width = 0.25
+
+        # x축 레이블 값 갯수
         index = np.arange(len(data))
         
+        # # 각 금리 bar를 순서대로 나타내는 과정, 각 그래프는 0.25의 간격을 두고 그려짐
         b1 = plt.bar(index, df['max_intr_rate'], bar_width, alpha=0.4, color='red', label='최고 금리')
         b2 = plt.bar(index + bar_width, df['max_intr_rate2'], bar_width, alpha=0.4, color='blue', label='최고 우대 금리')
 
-        plt.xticks(np.arange(bar_width, 4 + bar_width, 1), data.keys())
+        # 막대 위에 값 표시
+        for i, v in enumerate(df['max_intr_rate']):
+            ax.text(i, v + 0.1, f'{v:.2f}', ha='center', va='bottom', fontsize=10, color='black')
+        for i, v in enumerate(df['max_intr_rate2']):
+            ax.text(i + bar_width, v + 0.1, f'{v:.2f}', ha='center', va='bottom', fontsize=10, color='black')
+
+        # x축 레이블 위치, 이름 설정
+        ax.set_xticks(index + bar_width / 2)
+        ax.set_xticklabels(data.keys())
 
         plt.xlabel('상품명', size = 13)
         plt.ylabel('금리 (%)', size=13)
-        plt.legend()
-        plt.show()
-        return Response(df)
+        plt.legend() # 범례 표시
+
+        # y축 최소, 최대값 설정
+        ax.set_ylim(0, 5.0)
+
+        plt.tight_layout()
+        # plt.show()
+        buffer = BytesIO()
+        plt.savefig(buffer, format='png')
+        image = base64.b64encode(buffer.getvalue()).decode('utf-8').replace('\n', '')
+        buffer.close()
+
+        return Response({ 'data': f'data:image/png;base64,{image}' })
 
 
 # # 예금 목록 불러와서 상품 DB에 저장하는 view
