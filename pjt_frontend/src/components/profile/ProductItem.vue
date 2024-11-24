@@ -1,10 +1,9 @@
 <template>
   <div>
-    <div>
-      <RouterLink :to="{name:'deposit'}">돌아가기</RouterLink>
+    <div id="header">
     </div>
     <div id="body">
-      <div id="content">
+      <div id="content" @click="goToDetail">
         <div id="title">
           <div id="nm">
             <div id="co_nm">
@@ -42,15 +41,22 @@
 </template>
 
 <script setup>
+import { useDepositStore } from '@/stores/deposit';
+import { useSavingsStore } from '@/stores/savings';
 import { useUserStore } from '@/stores/user';
 import axios from 'axios';
 import { ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 const props = defineProps({
   productdata: Object,
 })
 const emit = defineEmits(['refreshdata'])
 const userStore = useUserStore()
+const depositStore = useDepositStore()
+const savingStore = useSavingsStore()
+const route = useRoute()
+const router = useRouter()
 
 const max_intr_rate = ref(0)
 const min_intr_rate = ref(100)
@@ -85,6 +91,19 @@ const deleteProductfromList = function (which) {
     .catch((err) => {
       console.log(err.response.data)
     })
+}
+
+const goToDetail = function () {
+  if (route.name === 'favorite') {
+    depositStore.depositItem = props.productdata
+    depositStore.depositOptionList = props.productdata.options
+    router.push({ name: 'depositDetail', params: { id: 99 }})
+  }
+  if (route.name === 'join') {
+    savingStore.savingsItem = props.productdata
+    savingStore.savingsOptionList = props.productdata.options
+    router.push({ name: 'savingsDetail', params: { id: 99 }})
+  }
 }
 </script>
 
