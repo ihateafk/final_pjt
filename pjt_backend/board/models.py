@@ -14,5 +14,5 @@ class Board(models.Model) :
 # 댓글 모델 
 class Comment(models.Model) :
     comment = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    board = models.ForeignKey(Board, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name='comment_set')
