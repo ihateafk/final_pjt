@@ -39,6 +39,7 @@
         <button class="btn btn-danger" @click="deleteProductfromList('join')">가입한 상품 삭제</button>
       </div>
     </div>
+    
   </div>
 </template>
 
