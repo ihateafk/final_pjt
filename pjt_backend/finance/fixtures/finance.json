@@ -1324,5 +1324,292 @@
         "fin_co_no": "0017801",
         "company_name": "토스뱅크 주식회사"
     }
+},
+{
+    "model": "finance.product",
+    "pk": 1,
+    "fields": {
+        "product_company": 147,
+        "fin_category": 1,
+        "fin_co_no": "0010001",
+        "fin_prdt_cd": "WR0001B",
+        "fin_prdt_nm": "WON플러스예금",
+        "mtrt_int": "만기 후\n- 1개월이내 : 만기시점약정이율×50%\n- 1개월초과 6개월이내: 만기시점약정이율×30%\n- 6개월초과 : 만기시점약정이율×20%\n\n※ 만기시점 약정이율 : 일반정기예금 금리",
+        "spcl_cnd": "해당사항 없음",
+        "join_member": "실명의 개인",
+        "etc_note": "- 가입기간: 1~36개월\n- 최소가입금액: 1만원 이상\n- 만기일을 일,월 단위로 자유롭게 선택 가능\n- 만기해지 시 신규일 당시 영업점과 인터넷 홈페이지에 고시된 계약기간별 금리 적용",
+        "join_way": "인터넷,스마트폰,전화(텔레뱅킹)"
+    }
+},
+{
+    "model": "finance.product",
+    "pk": 2,
+    "fields": {
+        "product_company": 149,
+        "fin_category": 1,
+        "fin_co_no": "0010016",
+        "fin_prdt_cd": "10511008001166004",
+        "fin_prdt_nm": "iM함께예금",
+        "mtrt_int": "만기 후 1개월 미만 경과 : 약정이자율 x 50%\n만기 후 3개월 미만 경과 : 약정이자율 x 25% \n만기 후 3개월 이상 경과 : 약정이자율 x 10%",
+        "spcl_cnd": "*최고우대금리: 연0.45%p\n-전월 총 수신 평잔실적 또는 상품 가입 전 첫만남플러스 통장 보유시 \n-당행 주택청약상품보유 \n-신규일 \"iM함께적금\" 동시 가입 및 만기 보유 \n-당행 오픈뱅킹서비스에 다른 은행 계좌 등록시 \n각 연0.10%p                       \n*해당 상품을 인터넷/모바일뱅킹을 통해 가입 시: 연0.05%p",
+        "join_member": "실명의 개인 및 개인사업자",
+        "etc_note": "계좌당 가입 최저한도 : 100만원",
+        "join_way": "영업점,인터넷,스마트폰"
+    }
+},
+{
+    "model": "finance.product",
+    "pk": 3,
+    "fields": {
+        "product_company": 147,
+        "fin_category": 1,
+        "fin_co_no": "0010001",
+        "fin_prdt_cd": "WR0001L",
+        "fin_prdt_nm": "WON적금",
+        "mtrt_int": "만기 후\n- 1개월이내 : 만기시점약정이율×50%\n- 1개월초과 6개월이내: 만기시점약정이율×30%\n- 6개월초과 : 만기시점약정이율×20%\n\n※ 만기시점 약정이율 : 일반정기적금 금리",
+        "spcl_cnd": "1. 아래 각 항(가, 나)의 조건을 충족하는 경우 합산 최대 연 0.2%p 우대\n가. 이 적금을 우리꿈통장, WON통장에 연결하여 가입하는 경우 : 0.1%p\n나. 우리 오픈뱅킹 서비스에 타행계좌가 등록되어 있는 경우 : 연 0.1%p",
+        "join_member": "실명의 개인",
+        "etc_note": "1. 가입기간 : 1년\n2. 가입금액 : 월 50만원 이내",
+        "join_way": "스마트폰,전화(텔레뱅킹)"
+    }
+},
+{
+    "model": "finance.product",
+    "pk": 4,
+    "fields": {
+        "product_company": 149,
+        "fin_category": 1,
+        "fin_co_no": "0010016",
+        "fin_prdt_cd": "10511008000996000",
+        "fin_prdt_nm": "iM주거래우대예금(첫만남고객형)",
+        "mtrt_int": "만기 후 1개월 미만 경과 : 약정이자율 x 50%\n만기 후 3개월 미만 경과 : 약정이자율 x 25% \n만기 후 3개월 이상 경과 : 약정이자율 x 10%",
+        "spcl_cnd": "* 최고우대금리 : 연0.65%p              \n - 목돈굴리기예금 최초 가입시 : 연0.20%p\n - 상품 가입 전 최근 1개월 이내 신용(체크)카드 신규 발급 : 연0.20%p\n - 상품 가입 전 최근 1개월 이내 인터넷.폰.모바일앱뱅킹 가입 : 연0.20%p\n * 해당 상품을 인터넷/모바일뱅킹을 통해 가입 : 연0.05%p",
+        "join_member": "실명의 개인",
+        "etc_note": "계좌당 가입 최저한도 : 100만원",
+        "join_way": "영업점,인터넷,스마트폰"
+    }
+},
+{
+    "model": "finance.productoption",
+    "pk": 1,
+    "fields": {
+        "base_product": 1,
+        "fin_prdt_cd": "WR0001B",
+        "save_trm": 1,
+        "intr_rate": 3.0,
+        "intr_rate2": 3.0
+    }
+},
+{
+    "model": "finance.productoption",
+    "pk": 2,
+    "fields": {
+        "base_product": 1,
+        "fin_prdt_cd": "WR0001B",
+        "save_trm": 3,
+        "intr_rate": 3.37,
+        "intr_rate2": 3.37
+    }
+},
+{
+    "model": "finance.productoption",
+    "pk": 3,
+    "fields": {
+        "base_product": 1,
+        "fin_prdt_cd": "WR0001B",
+        "save_trm": 6,
+        "intr_rate": 3.42,
+        "intr_rate2": 3.42
+    }
+},
+{
+    "model": "finance.productoption",
+    "pk": 4,
+    "fields": {
+        "base_product": 1,
+        "fin_prdt_cd": "WR0001B",
+        "save_trm": 12,
+        "intr_rate": 3.37,
+        "intr_rate2": 3.37
+    }
+},
+{
+    "model": "finance.productoption",
+    "pk": 5,
+    "fields": {
+        "base_product": 1,
+        "fin_prdt_cd": "WR0001B",
+        "save_trm": 24,
+        "intr_rate": 2.7,
+        "intr_rate2": 2.7
+    }
+},
+{
+    "model": "finance.productoption",
+    "pk": 6,
+    "fields": {
+        "base_product": 1,
+        "fin_prdt_cd": "WR0001B",
+        "save_trm": 36,
+        "intr_rate": 2.7,
+        "intr_rate2": 2.7
+    }
+},
+{
+    "model": "finance.productoption",
+    "pk": 7,
+    "fields": {
+        "base_product": 2,
+        "fin_prdt_cd": "10511008001166004",
+        "save_trm": 12,
+        "intr_rate": 3.05,
+        "intr_rate2": 3.5
+    }
+},
+{
+    "model": "finance.productoption",
+    "pk": 8,
+    "fields": {
+        "base_product": 3,
+        "fin_prdt_cd": "WR0001L",
+        "save_trm": 12,
+        "intr_rate": 3.7,
+        "intr_rate2": 3.9
+    }
+},
+{
+    "model": "finance.productoption",
+    "pk": 9,
+    "fields": {
+        "base_product": 3,
+        "fin_prdt_cd": "WR0001L",
+        "save_trm": 12,
+        "intr_rate": 3.7,
+        "intr_rate2": 3.9
+    }
+},
+{
+    "model": "finance.productoption",
+    "pk": 10,
+    "fields": {
+        "base_product": 4,
+        "fin_prdt_cd": "10511008000996000",
+        "save_trm": 6,
+        "intr_rate": 2.22,
+        "intr_rate2": 2.87
+    }
+},
+{
+    "model": "finance.productoption",
+    "pk": 11,
+    "fields": {
+        "base_product": 4,
+        "fin_prdt_cd": "10511008000996000",
+        "save_trm": 12,
+        "intr_rate": 2.91,
+        "intr_rate2": 3.56
+    }
+},
+{
+    "model": "finance.productoption",
+    "pk": 12,
+    "fields": {
+        "base_product": 4,
+        "fin_prdt_cd": "10511008000996000",
+        "save_trm": 24,
+        "intr_rate": 2.78,
+        "intr_rate2": 3.43
+    }
+},
+{
+    "model": "finance.productoption",
+    "pk": 13,
+    "fields": {
+        "base_product": 4,
+        "fin_prdt_cd": "10511008000996000",
+        "save_trm": 36,
+        "intr_rate": 2.8,
+        "intr_rate2": 3.45
+    }
+},
+{
+    "model": "finance.joinproduct",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "product": 1
+    }
+},
+{
+    "model": "finance.joinproduct",
+    "pk": 2,
+    "fields": {
+        "user": 1,
+        "product": 2
+    }
+},
+{
+    "model": "finance.joinproduct",
+    "pk": 3,
+    "fields": {
+        "user": 1,
+        "product": 3
+    }
+},
+{
+    "model": "finance.joinproduct",
+    "pk": 4,
+    "fields": {
+        "user": 2,
+        "product": 4
+    }
+},
+{
+    "model": "finance.joinproduct",
+    "pk": 5,
+    "fields": {
+        "user": 2,
+        "product": 2
+    }
+},
+{
+    "model": "finance.favoriteproduct",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "product": 1
+    }
+},
+{
+    "model": "finance.favoriteproduct",
+    "pk": 2,
+    "fields": {
+        "user": 1,
+        "product": 2
+    }
+},
+{
+    "model": "finance.favoriteproduct",
+    "pk": 3,
+    "fields": {
+        "user": 1,
+        "product": 3
+    }
+},
+{
+    "model": "finance.favoriteproduct",
+    "pk": 4,
+    "fields": {
+        "user": 2,
+        "product": 4
+    }
+},
+{
+    "model": "finance.favoriteproduct",
+    "pk": 5,
+    "fields": {
+        "user": 2,
+        "product": 2
+    }
 }
 ]

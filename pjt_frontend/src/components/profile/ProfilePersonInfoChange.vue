@@ -1,43 +1,105 @@
 <template>
-  <div>
-    <div id="title">개인 정보 수정</div>
-    <div id="body">
-      <div id="inputsection">
-        <label for="email" class="title">email</label>
-        <input type="email" id="email" :value="email" disabled>
+  <div class="container p-4">
+    <h5 class="mb-4">개인 정보 수정</h5>
+    
+    <div class="row g-3">
+      <!-- Email Field -->
+      <div class="col-12 col-md-6">
+        <div class="small text-dark mb-1">Email</div>
+        <input 
+          type="email" 
+          class="form-control bg-light" 
+          :value="email" 
+          disabled
+        >
       </div>
-      <div id="inputsection">
-        <span class="title">password</span>
-        <button @click="goToPwChange">변경하기</button>
+
+      <!-- Password Change Button -->
+      <div class="col-12 col-md-6">
+        <div class="small text-dark mb-1">Password</div>
+        <button 
+          @click="goToPwChange" 
+          class="form-control text-primary border d-flex align-items-center"
+        >
+          변경하기
+        </button>
       </div>
-      <div id="inputsection">
-        <label for="name" class="title">name</label>
-        <input type="text" id="name" v-model.trim="name">
+
+      <!-- Name Field -->
+      <div class="col-12 col-md-6">
+        <div class="small text-dark mb-1">Name</div>
+        <input 
+          type="text" 
+          class="form-control" 
+          v-model.trim="name"
+        >
       </div>
-      <div id="inputsection">
-        <label for="age" class="title">age</label>
-        <input type="number" id="age" v-model="age">
+
+      <!-- Age Field -->
+      <div class="col-12 col-md-6">
+        <div class="small text-dark mb-1">Age</div>
+        <input 
+          type="number" 
+          class="form-control" 
+          v-model="age"
+        >
       </div>
-      <div id="inputsection">
-        <label for="gender" class="title">gender</label>
-        <input type="text" id="gender" v-model.trim="gender">
+
+      <!-- Gender Field -->
+      <div class="col-12 col-md-6">
+        <div class="small text-dark mb-1">Gender</div>
+        <input 
+          type="text" 
+          class="form-control" 
+          v-model.trim="gender"
+        >
       </div>
-      <div id="inputsection">
-        <label for="birthday" class="title">birthday</label>
-        <input type="date" id="birthday" v-model="birthday">
+
+      <!-- Birthday Field -->
+      <div class="col-12 col-md-6">
+        <div class="small text-dark mb-1">Birthday</div>
+        <input 
+          type="date" 
+          class="form-control" 
+          v-model="birthday"
+        >
       </div>
-      <div id="inputsection">
-        <label for="address" class="title">address</label>
-        <input type="text" id="address" v-model.trim="address">
+
+      <!-- Address Field -->
+      <div class="col-12">
+        <div class="small text-dark mb-1">Address</div>
+        <input 
+          type="text" 
+          class="form-control" 
+          v-model.trim="address"
+        >
       </div>
-      <div id="inputsection">
-        <label for="job" class="title">job</label>
-        <input type="text" id="job" v-model.trim="job">
+
+      <!-- Job Field -->
+      <div class="col-12 col-md-6">
+        <div class="small text-dark mb-1">Job</div>
+        <input 
+          type="text" 
+          class="form-control" 
+          v-model.trim="job"
+        >
       </div>
     </div>
-    <div id="bottom">
-      <button @click="changeConfirm(true)">수정하기</button>
-      <button @click="changeConfirm(false)">취소</button>
+
+    <!-- Action Buttons -->
+    <div class="d-flex gap-2 justify-content-center mt-4">
+      <button 
+        @click="changeConfirm(true)" 
+        class="btn btn-primary px-4"
+      >
+        수정하기
+      </button>
+      <button 
+        @click="changeConfirm(false)" 
+        class="btn btn-secondary px-4"
+      >
+        취소
+      </button>
     </div>
   </div>
 </template>
@@ -105,6 +167,36 @@ const changeConfirm = function (confirm) {
 }
 </script>
 
-<style lang="css" scoped>
+<style scoped>
+.form-control {
+  height: auto;
+  min-height: 44px;
+  font-size: 0.875rem;
+  padding: 0.75rem;
+}
 
+.form-control:focus {
+  box-shadow: none;
+  border-color: #dee2e6;
+}
+
+.btn-primary {
+  background-color: #3182F6;
+  border-color: #3182F6;
+}
+
+.btn-primary:hover {
+  background-color: #2b74db;
+  border-color: #2b74db;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+  background-color: #5c636a;
+  border-color: #565e64;
+}
 </style>

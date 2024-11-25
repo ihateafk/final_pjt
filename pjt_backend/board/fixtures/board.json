@@ -1,0 +1,50 @@
+[
+{
+    "model": "board.board",
+    "pk": 1,
+    "fields": {
+        "title": "적금 상품을 가입하고 싶어요",
+        "content": "어떤 상품을 가입하는 게 좋을까요?",
+        "created_at": "2024-11-25",
+        "user": 1
+    }
+},
+{
+    "model": "board.board",
+    "pk": 2,
+    "fields": {
+        "title": "추천해 주신 적금이 마음에 안 들어요",
+        "content": "적금 말고 예금 추천해 주세요",
+        "created_at": "2024-11-25",
+        "user": 1
+    }
+},
+{
+    "model": "board.board",
+    "pk": 3,
+    "fields": {
+        "title": "여행을 가기로 했는데",
+        "content": "환율을 계산하고 싶어요\n환율 계산기 정확한가요?",
+        "created_at": "2024-11-25",
+        "user": 2
+    }
+},
+{
+    "model": "board.comment",
+    "pk": 1,
+    "fields": {
+        "comment": "제발 추천해 주세요",
+        "user": 1,
+        "board": 1
+    }
+},
+{
+    "model": "board.comment",
+    "pk": 2,
+    "fields": {
+        "comment": "우리은행 적금 추천합니다! 이거 괜찮아요",
+        "user": 2,
+        "board": 1
+    }
+}
+]

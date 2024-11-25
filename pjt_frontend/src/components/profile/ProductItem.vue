@@ -1,45 +1,76 @@
 <template>
-  <div class="container-fluid my-4">
-    <div id="body" class="border rounded-3 p-4 shadow-sm">
-      <div id="nm" class="d-flex flex-column mb-3" @click="goToDetail">
-        <div id="co_nm" class="fw-bold">{{ productdata.kor_co_nm }}</div>
-        <div id="prdt_nm fs-4">{{ productdata.fin_prdt_nm }}</div>
-      </div>
-      <div id="intrrate" class="d-flex justify-content-between mb-3">
-        <div>
-          <p class="mb-1">최고 우대 금리</p>
-          <p class="text-primary fw-bold">{{ max_intr_rate }}</p>
+  <div class="container-fluid p-3">
+    <div class="card border-0 shadow-sm hover-shadow">
+      <!-- Product Header -->
+      <div class="card-body p-4">
+        <div class="cursor-pointer mb-4" @click="goToDetail">
+          <h6 class="text-secondary mb-2">{{ productdata.kor_co_nm }}</h6>
+          <h5 class="card-title fw-bold">{{ productdata.fin_prdt_nm }}</h5>
         </div>
-        <div>
-          <p class="mb-1">최저 금리</p>
-          <p class="text-primary fw-bold">{{ min_intr_rate }}</p>
+
+        <!-- Interest Rates -->
+        <div class="row mb-4">
+          <div class="col-6">
+            <div class="p-3 bg-light rounded-3">
+              <div class="small text-secondary mb-1">최고 우대 금리</div>
+              <div class="fs-4 text-primary fw-bold">{{ max_intr_rate }}</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="p-3 bg-light rounded-3">
+              <div class="small text-secondary mb-1">최저 금리</div>
+              <div class="fs-4 text-primary fw-bold">{{ min_intr_rate }}</div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div id="otherinfo">
-        <p class="mb-2">
-          <span class="fw-bold">만기 후 이자율:</span> {{ productdata.mtrt_int }}
-        </p>
-        <p class="mb-2">
-          <span class="fw-bold">가입 방법:</span> {{ productdata.join_way }}
-        </p>
-        <p class="mb-2">
-          <span class="fw-bold">우대 조건:</span> {{ productdata.spcl_cnd }}
-        </p>
-        <p class="mb-2">
-          <span class="fw-bold">가입 대상:</span> {{ productdata.join_member }}
-        </p>
-        <p class="mb-2">
-          <span class="fw-bold">유의 사항:</span> {{ productdata.etc_note }}
-        </p>
-      </div>
-      <div id="favorbtn" v-if="$route.name === 'favorite'" class="d-flex justify-content-end">
-        <button class="btn btn-outline-danger" @click="deleteProductfromList('favorite')">관심상품 삭제</button>
-      </div>
-      <div id="joinbtn" v-if="$route.name === 'subscribe'" class="d-flex justify-content-end">
-        <button class="btn btn-danger" @click="deleteProductfromList('join')">가입한 상품 삭제</button>
+
+        <!-- Product Details -->
+        <div class="mb-4">
+          <div class="mb-3">
+            <div class="small text-secondary mb-1">만기 후 이자율</div>
+            <div>{{ productdata.mtrt_int }}</div>
+          </div>
+          
+          <div class="mb-3">
+            <div class="small text-secondary mb-1">가입 방법</div>
+            <div>{{ productdata.join_way }}</div>
+          </div>
+          
+          <div class="mb-3">
+            <div class="small text-secondary mb-1">우대 조건</div>
+            <div>{{ productdata.spcl_cnd }}</div>
+          </div>
+          
+          <div class="mb-3">
+            <div class="small text-secondary mb-1">가입 대상</div>
+            <div>{{ productdata.join_member }}</div>
+          </div>
+          
+          <div>
+            <div class="small text-secondary mb-1">유의 사항</div>
+            <div>{{ productdata.etc_note }}</div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="d-flex justify-content-end">
+          <button 
+            v-if="$route.name === 'favorite'" 
+            class="btn btn-outline-danger px-4"
+            @click="deleteProductfromList('favorite')"
+          >
+            관심상품 삭제
+          </button>
+          <button 
+            v-if="$route.name === 'subscribe'" 
+            class="btn btn-danger px-4"
+            @click="deleteProductfromList('join')"
+          >
+            가입한 상품 삭제
+          </button>
+        </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -65,14 +96,13 @@ const max_intr_rate = ref(0)
 const min_intr_rate = ref(100)
 
 props.productdata.options.forEach((option) => {
-    if (option.intr_rate2 > max_intr_rate.value) {
-      max_intr_rate.value = option.intr_rate2
-    }
-    if (option.intr_rate < min_intr_rate.value) {
-      min_intr_rate.value = option.intr_rate
-    }
-  })
-  
+  if (option.intr_rate2 > max_intr_rate.value) {
+    max_intr_rate.value = option.intr_rate2
+  }
+  if (option.intr_rate < min_intr_rate.value) {
+    min_intr_rate.value = option.intr_rate
+  }
+})
 
 max_intr_rate.value = Number.parseFloat(max_intr_rate.value).toFixed(2) + "%"
 min_intr_rate.value = Number.parseFloat(min_intr_rate.value).toFixed(2) + "%"
@@ -111,6 +141,33 @@ const goToDetail = function () {
 }
 </script>
 
-<style lang="css" scoped>
+<style scoped>
+.hover-shadow {
+  transition: all 0.3s ease;
+}
 
+.hover-shadow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.card {
+  background-color: #ffffff;
+}
+
+.bg-light {
+  background-color: #f8f9fa !important;
+}
+
+.btn-danger, .btn-outline-danger {
+  padding: 0.5rem 1.5rem;
+}
+
+.fs-4 {
+  font-size: 1.5rem !important;
+}
 </style>
