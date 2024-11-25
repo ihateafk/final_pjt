@@ -22,5 +22,5 @@ class User(AbstractUser):
 
 class Chat(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chathistory')
-    sender = models.CharField(max_length=100, default='나')
+    sender = models.CharField(max_length=100)
     content = models.TextField()
