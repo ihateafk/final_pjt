@@ -5,7 +5,7 @@ from allauth.socialaccount.models import EmailAddress
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from dj_rest_auth.serializers import UserDetailsSerializer
 from django.contrib.auth import get_user_model
-from .models import User
+from .models import User, Chat
 
 class UserProfileSerializer(serializers.ModelSerializer):
     # class UserJobNameSeiralizer(serializers.ModelSerializer):
@@ -104,5 +104,13 @@ class CustomUserDetailSerializer(UserDetailsSerializer):
 class ChatItemSerializer(serializers.ModelSerializer):
     
     class Meta:
-        model = User
-        fields = ('content',)
+        model = Chat
+        fields = ('sender', 'content')
+        
+
+class ChatStoreSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Chat
+        fields = '__all__'
+        read_only_fields = ('user',)

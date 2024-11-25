@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from django.http import JsonResponse
 from rest_framework import status
 from .models import Chat
-from .serializers import UserProfileSerializer, ChatItemSerializer
+from .serializers import UserProfileSerializer, ChatItemSerializer, ChatStoreSerializer
 
 
 # Create your views here.
@@ -39,7 +39,12 @@ def current_user(request):
 @permission_classes([IsAuthenticated])
 def chatHistory(request):
     if request.method == 'GET':
-        chatdata = request.user.chathistory.all()
-        return
+        chatdata = request.user.chathistory.all().order_by('pk')
+        serializer = ChatItemSerializer(instance=chatdata, many=True)
+        return Response(serializer.data)
     elif request.method == 'POST':
-        return
+        print(request)
+        serializer = ChatStoreSerializer(data=request.data, many=True)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
