@@ -149,11 +149,6 @@ const router = createRouter({
         }
       },
     },
-    {
-      path: '/recommend/test',
-      name: 'test',
-      component: () => import('@/views/recommend/RecommendTest.vue'),
-    }
   ],
 })
 

@@ -99,3 +99,6 @@ class CustomUserDetailSerializer(UserDetailsSerializer):
         model = UserModel
         fields = ('pk', *extra_fields)
         read_only_fields = ('email',)
+        
+
+# class ChatItemSerializer(serializers.ModelSerializer):
