@@ -39,7 +39,7 @@
         <button class="btn btn-danger" @click="deleteProductfromList('join')">가입한 상품 삭제</button>
       </div>
     </div>
-    
+
   </div>
 </template>
 
@@ -72,6 +72,7 @@ props.productdata.options.forEach((option) => {
       min_intr_rate.value = option.intr_rate
     }
   })
+  
 
 max_intr_rate.value = Number.parseFloat(max_intr_rate.value).toFixed(2) + "%"
 min_intr_rate.value = Number.parseFloat(min_intr_rate.value).toFixed(2) + "%"
