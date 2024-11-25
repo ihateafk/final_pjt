@@ -101,12 +101,12 @@ const logout = function () {
 
   .nav-link:hover,
   .nav-link.active {
-    background-color: blue;
+    background-color: #050C9C;
     color: white;
   }
 
   .nav-link.router-link-active {
-    background-color: blue;
+    background-color: #050C9C;
     color: white;
   }
 </style>

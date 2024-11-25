@@ -1,41 +1,43 @@
 <template>
-  <div>
-    <div id="header">
-    </div>
-    <div id="body">
-      <div id="content">
-        <div id="title">
-          <div id="nm"  @click="goToDetail">
-            <div id="co_nm">
-              <p>회사명 : {{productdata.kor_co_nm}}</p>
-            </div>
-            <div id="prdt_nm">
-              <p>금융 상품명 : {{productdata.fin_prdt_nm}}</p>
-            </div>
-          </div>
-          <div id="favorbtn" v-if="$route.name === 'favorite'">
-            <button @click="deleteProductfromList('favorite')">관심상품 삭제</button>
-          </div>
+  <div class="container-fluid my-4">
+    <div id="body" class="border rounded-3 p-4 shadow-sm">
+      <div id="nm" class="d-flex flex-column mb-3" @click="goToDetail">
+        <div id="co_nm" class="fw-bold">{{ productdata.kor_co_nm }}</div>
+        <div id="prdt_nm fs-4">{{ productdata.fin_prdt_nm }}</div>
+      </div>
+      <div id="intrrate" class="d-flex justify-content-between mb-3">
+        <div>
+          <p class="mb-1">최고 우대 금리</p>
+          <p class="text-primary fw-bold">{{ max_intr_rate }}</p>
         </div>
-        <div id="intrrate">
-          <div>
-            <p>최고 우대 금리 : {{ max_intr_rate }}</p>
-          </div>
-          <div>
-            <p>최저 금리 : {{ min_intr_rate }}</p>
-          </div>
-        </div>
-        <div id="otherinfo">
-          <p>만기 후 이자율 : {{productdata.mtrt_int}}</p>
-          <p>가입 방법 : {{productdata.join_way}}</p>
-          <p>우대 조건 : {{ productdata.spcl_cnd }}</p>
-          <p>가입 대상 : {{ productdata.join_member }}</p>
-          <p>유의 사항 : {{ productdata.etc_note }}</p>
+        <div>
+          <p class="mb-1">최저 금리</p>
+          <p class="text-primary fw-bold">{{ min_intr_rate }}</p>
         </div>
       </div>
-    </div>
-    <div id="joinbtn" v-if="$route.name === 'subscribe'">
-      <button @click="deleteProductfromList('join')">가입한 상품 삭제</button>
+      <div id="otherinfo">
+        <p class="mb-2">
+          <span class="fw-bold">만기 후 이자율:</span> {{ productdata.mtrt_int }}
+        </p>
+        <p class="mb-2">
+          <span class="fw-bold">가입 방법:</span> {{ productdata.join_way }}
+        </p>
+        <p class="mb-2">
+          <span class="fw-bold">우대 조건:</span> {{ productdata.spcl_cnd }}
+        </p>
+        <p class="mb-2">
+          <span class="fw-bold">가입 대상:</span> {{ productdata.join_member }}
+        </p>
+        <p class="mb-2">
+          <span class="fw-bold">유의 사항:</span> {{ productdata.etc_note }}
+        </p>
+      </div>
+      <div id="favorbtn" v-if="$route.name === 'favorite'" class="d-flex justify-content-end">
+        <button class="btn btn-outline-danger" @click="deleteProductfromList('favorite')">관심상품 삭제</button>
+      </div>
+      <div id="joinbtn" v-if="$route.name === 'subscribe'" class="d-flex justify-content-end">
+        <button class="btn btn-danger" @click="deleteProductfromList('join')">가입한 상품 삭제</button>
+      </div>
     </div>
   </div>
 </template>

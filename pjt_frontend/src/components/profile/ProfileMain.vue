@@ -1,19 +1,36 @@
 <template>
-  <div>
-    <div id="joinlist">
-      <div id="title">가입상품</div>
-      <div id="prdt-content">
-        <div v-for="product in joinproducts">
-          {{ product.fin_prdt_nm }}
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-12">
+        <div class="card border-0 shadow-sm">
+          <div class="card-header border-0 bg-white">
+            <h4 class="card-title mb-0">가입상품</h4>
+          </div>
+          <div class="card-body">
+            <div v-for="product in joinproducts" class="mb-3 ps-2">
+              <p> {{ product.fin_prdt_nm }}</p>
+            </div>
+            <div v-if="joinproducts.length === 0">
+              <p class="text-muted">가입한 상품이 없습니다.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div id="rate-graph">
-      <div v-if="graph">
-        <img :src="graph.data" alt="intr_rate graph">
-      </div>
-      <div v-else>
-        <span>가입한 상품이 없습니다</span>
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="card border-0 shadow-sm">
+          <div class="card-header border-0 bg-white">
+          </div>
+          <div class="card-body d-flex justify-content-center align-items-center">
+            <div v-if="graph">
+              <img :src="graph.data" alt="intr_rate graph" class="img-fluid">
+            </div>
+            <div v-else>
+              <p class="text-muted">가입한 상품이 없습니다.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -79,5 +96,19 @@ onBeforeMount(() => {
 </script>
 
 <style lang="css" scoped>
+.card {
+  border-radius: 0.5rem;
+}
 
+.card-header {
+  border-bottom: none;
+}
+
+.card-title {
+  font-weight: 600;
+}
+
+.card-subtitle {
+  color: #6c757d;
+}
 </style>

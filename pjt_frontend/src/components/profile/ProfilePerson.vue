@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <div id="title">개인정보</div>
-    <div id="body">
+  <div class="container-fluid my-4">
+    <div id="title" class="fw-bold fs-4 mb-3">개인정보</div>
+    <div id="body" class="border rounded-3 p-4 shadow-sm">
       <div v-if="userStore.userdata">
         <PersonInfoItem
           v-for="(value, key) in userStore.userdata"
@@ -10,8 +10,8 @@
         />
       </div>
     </div>
-    <div id="bottom">
-      <button @click="goToChangeInfo">개인 정보 수정</button>
+    <div id="bottom" class="d-flex justify-content-center mt-3">
+      <button class="btn btn-primary" @click="goToChangeInfo">개인 정보 수정</button>
     </div>
   </div>
 </template>
