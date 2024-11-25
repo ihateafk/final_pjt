@@ -26,7 +26,7 @@ const logout = function () {
     .then((res) => {
       userStore.token = null;
       console.log('LOGOUT SUCCESS');
-      router.push({ name: 'home' });
+      router.push({ name: 'login' });
     })
     .catch((err) => {
       console.log('LOGOUT FAILED');

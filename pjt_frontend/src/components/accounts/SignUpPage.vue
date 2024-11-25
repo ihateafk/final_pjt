@@ -8,7 +8,7 @@
         <form @submit.prevent="signup">
           <div>
             <label for="email">email</label>
-            <input type="email" id="email" v-model.trim="email">
+            <input type="email" id="email" v-model.trim="email" ref="email_input">
           </div>
 
           <div>
@@ -62,7 +62,7 @@
 <script setup>
 import { useUserStore } from '@/stores/user';
 import axios from 'axios';
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 
@@ -78,6 +78,7 @@ const gender = ref('')
 const birthday = ref('')
 const address = ref('')
 const job = ref('')
+const email_input = ref(null)
 
 
 const signup = function () {
@@ -105,6 +106,10 @@ const signup = function () {
       console.log(err.response.data)
     })
 }
+
+onMounted(() => {
+  email_input.value.focus()
+})
 </script>
 
 <style lang="css" scoped>

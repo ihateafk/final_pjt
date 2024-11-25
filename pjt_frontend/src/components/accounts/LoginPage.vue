@@ -8,7 +8,7 @@
         <form @submit.prevent="login">
           <div>
             <label for="email">Email</label>
-            <input type="text" id="email" v-model.trim="email">
+            <input type="text" id="email" v-model.trim="email" ref="email_input">
           </div>
           <div>
             <label for="pw">Password</label>
@@ -35,7 +35,7 @@
 import { useDepositStore } from '@/stores/deposit';
 import { useUserStore } from '@/stores/user';
 import axios from 'axios';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const userStore = useUserStore()
@@ -43,6 +43,7 @@ const router = useRouter()
 
 const email = ref('')
 const pw = ref('')
+const email_input = ref(null)
 
 const login = function () {
   axios({
@@ -63,6 +64,10 @@ const login = function () {
       console.log(err.response.data)
     })
 }
+
+onMounted(() => {
+  email_input.value.focus()
+})
 </script>
 
 <style scoped>

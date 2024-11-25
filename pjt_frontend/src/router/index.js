@@ -133,6 +133,26 @@ const router = createRouter({
           next({ name: 'login' })
         }
       }
+    },
+    {
+      path: '/recommend',
+      name: 'recommend',
+      component: () => import('@/views/recommend/RecommendView.vue'),
+      beforeEnter: (to, from, next) => {
+        const userStore = useUserStore()
+
+        if (userStore.token !== null) {
+          next()
+        } else {
+          alert('로그인이 필요합니다.')
+          next({ name: 'login' })
+        }
+      },
+    },
+    {
+      path: '/recommend/test',
+      name: 'test',
+      component: () => import('@/views/recommend/RecommendTest.vue'),
     }
   ],
 })
