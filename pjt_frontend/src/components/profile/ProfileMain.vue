@@ -12,6 +12,9 @@
       <div v-if="graph">
         <img :src="graph.data" alt="intr_rate graph">
       </div>
+      <div v-else>
+        <span>가입한 상품이 없습니다</span>
+      </div>
     </div>
   </div>
 </template>
@@ -60,7 +63,9 @@ const getproductdata = function (which) {
       console.log("LOAD SUCCESS")
       joinproducts.value = res.data
       console.log(joinproducts.value)
-      getGraph()
+      if (res.data.length > 0) {
+        getGraph()
+      }
     })
     .catch((err) => {
       console.log("LOAD FAILED")

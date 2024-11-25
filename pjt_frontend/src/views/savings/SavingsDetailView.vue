@@ -15,14 +15,14 @@
             <p class="text-secondary mb-0">{{ store.savingsItem.kor_co_nm }}</p>
           </div>
           <button
-            v-if="userStore.token && !addedfavor"
+            v-show="userStore.token && !addedfavor"
             @click="addProduct('favorite')" 
             class="btn btn-outline-primary btn-sm"
           >
             <i class="bi bi-star me-1"></i>관심상품 등록
           </button>
           <button
-            v-else-if="userStore.token && addedfavor"
+            v-show="userStore.token && addedfavor"
             @click="deleteProductfromList('favorite')" 
             class="btn btn-outline-primary btn-sm"
           >
@@ -76,14 +76,14 @@
       <!-- 가입하기 버튼 -->
       <div class="card-footer bg-white border-top p-4">
         <button
-          v-if="userStore.token && !addedjoin"
+          v-show="userStore.token && !addedjoin"
           @click="addProduct('join')" 
           class="btn btn-primary w-100"
         >
           가입한 상품 추가하기
         </button>
         <button
-          v-else-if="userStore.token && addedjoin"
+          v-show="userStore.token && addedjoin"
           @click="deleteProductfromList('join')" 
           class="btn btn-primary w-100"
         >
@@ -143,27 +143,27 @@ const addProduct = function (which) {
     .catch((err) => {
       console.log(err.response.data)
     })
+}
 
-    const deleteProductfromList = function (which) {
-    axios({
-      method: 'delete',
-      url: `${userStore.URL}/finance/product/${which}/`,
-      headers: {
-        Authorization: `Token ${userStore.token}`,
-      },
-      data: {
-        product_id: product_id.value
-      }
+const deleteProductfromList = function (which) {
+  axios({
+    method: 'delete',
+    url: `${userStore.URL}/finance/product/${which}/`,
+    headers: {
+      Authorization: `Token ${userStore.token}`,
+    },
+    data: {
+      product_id: product_id.value
+    }
+  })
+    .then((res) => {
+      console.log('DELETE SUCCESS')
+      console.log(res)
+      getproductdata(which)
     })
-      .then((res) => {
-        console.log('DELETE SUCCESS')
-        console.log(res)
-        getproductdata(which)
-      })
-      .catch((err) => {
-        console.log(err.response.data)
-      })
-  }
+    .catch((err) => {
+      console.log(err.response.data)
+    })
 }
 
 const getproductdata = function (which) {
@@ -175,11 +175,11 @@ const getproductdata = function (which) {
     },
   })
     .then((res) => {
-      console.log("LOAD SUCCESS")
+      console.log("getproductdata LOAD SUCCESS")
       console.log(res.data)
       if (which === 'favorite') {
         addedfavor.value = res.data.filter((product) => {
-          if (product.fin_prdt_cd === store.depositItem.fin_prdt_cd) {
+          if (product.fin_prdt_cd === store.savingsItem.fin_prdt_cd) {
             product_id.value = product.id
             return true
           }
@@ -187,7 +187,7 @@ const getproductdata = function (which) {
       }
       if (which === 'join') {
         addedjoin.value = res.data.filter((product) => {
-          if (product.fin_prdt_cd === store.depositItem.fin_prdt_cd) {
+          if (product.fin_prdt_cd === store.savingsItem.fin_prdt_cd) {
             product_id.value = product.id
             return true
           }
@@ -195,8 +195,8 @@ const getproductdata = function (which) {
       }
     })
     .catch((err) => {
-      console.log("LOAD FAILED")
-      console.log(err.response.data)
+      console.log("getproductdata LOAD FAILED")
+      console.log(err)
     })
 }
 

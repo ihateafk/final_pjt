@@ -73,7 +73,7 @@ def favoriteProduct(request):
 
         # 레코드 중복 검사
         if request.user.favoriteproduct_set.filter(product_id=data['product']).exists():
-            return Response(status=status.HTTP_503_SERVICE_UNAVAILABLE)
+            return Response({ 'data': 'This product has been added' }, status=status.HTTP_503_SERVICE_UNAVAILABLE)
         
         serializer = favoriteProductSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
@@ -99,7 +99,7 @@ def joinProduct(request):
     elif request.method == 'POST':
         # DB에 있는지 없는지 검사해서 상품 및 유저 pk 반환
         data = addProductAndOptions(request.user, request.data)
-
+        
         # 레코드 중복 검사
         if request.user.joinproduct_set.filter(product_id=data['product']).exists():
             return Response({ 'data': 'This product has been added' }, status=status.HTTP_503_SERVICE_UNAVAILABLE)
@@ -158,8 +158,9 @@ def drawgraph(request):
         ax.set_xticks(index + bar_width / 2)
         ax.set_xticklabels(data.keys())
 
-        plt.xlabel('상품명', size = 13)
+        # plt.xlabel('상품명', size = 13)
         plt.ylabel('금리 (%)', size=13)
+        plt.xticks(rotation=-14)
         plt.legend() # 범례 표시
 
         # y축 최소, 최대값 설정

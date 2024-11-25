@@ -3,9 +3,9 @@
     <div id="header">
     </div>
     <div id="body">
-      <div id="content" @click="goToDetail">
+      <div id="content">
         <div id="title">
-          <div id="nm">
+          <div id="nm"  @click="goToDetail">
             <div id="co_nm">
               <p>회사명 : {{productdata.kor_co_nm}}</p>
             </div>
@@ -99,7 +99,7 @@ const goToDetail = function () {
     depositStore.depositOptionList = props.productdata.options
     router.push({ name: 'depositDetail', params: { id: 99 }})
   }
-  if (route.name === 'join') {
+  if (route.name === 'subscribe') {
     savingStore.savingsItem = props.productdata
     savingStore.savingsOptionList = props.productdata.options
     router.push({ name: 'savingsDetail', params: { id: 99 }})
