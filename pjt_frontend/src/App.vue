@@ -66,7 +66,8 @@ const logout = function () {
               <RouterLink class="nav-link" :to="{ name: 'signup' }">회원 가입</RouterLink>
             </li>
           </ul>
-          <ul class="navbar-nav" v-if="userStore.token !== null">
+          <ul class="navbar-nav" v-else>
+            <button id="chatbot" @click="$router.push({ name: 'recommend' })"><img src="/chatbot_logo_x32.png" alt="chatbot logo"></button>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 더 보기
@@ -108,5 +109,10 @@ const logout = function () {
   .nav-link.router-link-active {
     background-color: #050C9C;
     color: white;
+  }
+
+  #chatbot {
+    background: none;
+    border: none;
   }
 </style>

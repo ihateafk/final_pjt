@@ -28,7 +28,9 @@ const router = createRouter({
         const userStore = useUserStore()
 
         if (userStore.token !== null) {
-          alert('이미 로그인 되어 있습니다.')
+          if (from.name !== 'login') {
+            alert('이미 로그인 되어 있습니다.')
+          }
           next({ name: 'home' })
         }
         else {
@@ -45,8 +47,10 @@ const router = createRouter({
         const userStore = useUserStore()
 
         if (userStore.token !== null) {
-          alert('이미 로그인 되어 있습니다.')
-          next(from)
+          if (from.name !== 'signup') {
+            alert('이미 로그인 되어 있습니다.')
+            next(from)
+          } else next({ name: 'hoem' })
         }
         else {
           next()

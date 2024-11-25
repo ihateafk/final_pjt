@@ -54,13 +54,20 @@ function addMessage(sender, content) {
   scrollToBottom(); // 메시지 추가 후 자동 스크롤
 }
 
+// 메시지를 프롬프트로 변환 하는 함수
+function promptDecorator(content) {
+  const prompt = `${content}`
+  console.log(prompt)
+  return prompt
+}
+
 // ChatGPT API 요청
 async function fetchAIResponse() {
   try {
     // chatHistory를 js array로 변환
     const messages = chatHistory.value.map(msg => ({
       role: msg.sender === '나' ? 'user' : 'assistant',
-      content: msg.content, // 여기서 msg.content를 custom prompt로 변환
+      content: promptDecorator(msg.content), // 여기서 msg.content를 custom prompt로 변환
     }));
     
     // 시스템 메시지 추가 (대화 설정)

@@ -71,7 +71,7 @@
           <div class="form-group">
             <label for="birthday">생일</label>
             <input 
-              type="text" 
+              type="date" 
               id="birthday" 
               v-model.trim="birthday"
             >
@@ -204,7 +204,8 @@ label {
 input[type="email"],
 input[type="password"],
 input[type="text"],
-input[type="number"] {
+input[type="number"],
+input[type="date"] {
   width: 100%;
   padding: 0.75rem;
   border: 1px solid #ddd;
