@@ -101,4 +101,8 @@ class CustomUserDetailSerializer(UserDetailsSerializer):
         read_only_fields = ('email',)
         
 
-# class ChatItemSerializer(serializers.ModelSerializer):
+class ChatItemSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = User
+        fields = ('content',)

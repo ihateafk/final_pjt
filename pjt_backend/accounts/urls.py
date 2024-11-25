@@ -7,4 +7,5 @@ urlpatterns = [
     path('signup/', include('dj_rest_auth.registration.urls')),
     path('profile/', views.profile),
     path('user/', views.current_user),
+    path('chat/', views.chatHistory),
 ]

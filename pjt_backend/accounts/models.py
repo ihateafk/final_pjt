@@ -20,6 +20,6 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-# class Chat(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chatHistory')
-#     content = models.TextField()
+class Chat(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chathistory')
+    content = models.TextField()

@@ -102,6 +102,9 @@ async function sendMessage() {
 
   // 챗봇 메시지 추가
   addMessage('AI 상담사', aiResponse);
+  
+  // 서버에 메시지 전송
+  
 
   // 입력 필드 초기화
   message.value = '';
