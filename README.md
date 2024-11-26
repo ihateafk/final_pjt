@@ -27,10 +27,11 @@
 3. [적금 API](https://finlife.fss.or.kr/finlife/api/fdrmEntyApi/list.do?menuNo=700053)
 4. [환율 API](https://www.exchangerate-api.com/docs/standard-requests)
 5. [카카오맵 API](https://apis.map.kakao.com/web/)
+6. [챗 GPT API](https://platform.openai.com/docs/api-reference/introduction)
    <br><br>
 
 ## 🍀 아키텍처 🍀
-![image](https://github.com/user-attachments/assets/7f46f733-b09d-48df-8d7f-9bb5903b38e0)
+![starc](https://github.com/user-attachments/assets/99503675-283c-49d5-8c0a-5472c3ed1851)
 <br><br>
 
 ## 📜 업무 분담 (개발) 📜
@@ -38,15 +39,16 @@
   
 | 팀원 | 업무(일자 별) |
 |:---:|:---|
-| 윤종민 |  <br><b>11/20</b> : 1. 회원 가입 및 로그인 API 생성 (Django) <br> <br><b>11/21</b> : 1. 회원 가입, 로그인, 로그아웃 기능 구현 (Vue) <br><br> <b>11/22</b> : 1. 관심 및 가입 상품 추가 기능 구현 <br> &emsp;&ensp;&ensp;&ensp;&ensp; 2. 예적금 최고 최저 금리 표시 <br><br> <b>11/23</b> : 1. 마이페이지 프로필 조회 및 수정 <br> &emsp;&ensp;&ensp;&ensp;&ensp; 2. 비밀번호 수정 기능 <br> <br> <b>11/24</b> : 1. 관심 및 가입 상품 등록, 취소 기능 <br> <br> | |
-| 최은진 |  <br><b>11/20</b> : 1. 회사 목록 저장 API 생성 (Django) <br> &emsp;&ensp;&ensp;&ensp;&ensp; 2. 예금 목록 조회 기능 구현 <br> <br> <b>11/21</b> : 1. 예금 상세 보기 구현 <br> &emsp;&ensp;&ensp;&ensp;&ensp; 2. 적금 조회 및 상세 보기 구현 <br> &emsp;&ensp;&ensp;&ensp;&ensp; 3. 예적금 검색 기능 구현 <br> &emsp;&ensp;&ensp;&ensp;&ensp; 4. 카카오API 지도 출력 구현 <br> <br> <b>11/22</b> : 1. 카카오맵 지도 검색 후 결과 출력 구현 <br> &emsp;&ensp;&ensp;&ensp;&ensp; 2. 환율 계산기 기능 구현 <br> <br> <b>11/23</b> : 1. board 게시판 CRUD 및 상세 보기 구현 <br> <br> <b>11/24</b> 1. 댓글 관련 기능 구현 <br> &emsp;&ensp;&ensp;&ensp;&ensp; 2. map 관련 bootstrap style 구현 <br> &emsp;&ensp;&ensp;&ensp;&ensp; 3. 예/적금 관련 bootstrap style 구현 <br> &emsp;&ensp;&ensp;&ensp;&ensp; 4. 게시판 관련 bootstrap style 구현 <br> &emsp;&ensp;&ensp;&ensp;&ensp; 5. 환율 관련 bootstrap style 구현 <br> <br> |
+| 윤종민 |  <br><b>11/20</b> : 1. 회원 가입 및 로그인 API 생성 (Django) <br> <br><b>11/21</b> : 1. 회원 가입, 로그인, 로그아웃 기능 구현 (Vue) <br><br> <b>11/22</b> : 1. 관심 및 가입 상품 추가 기능 구현 <br> &emsp;&ensp;&ensp;&ensp;&ensp; 2. 예적금 최고 최저 금리 표시 <br><br> <b>11/23</b> : 1. 마이페이지 프로필 조회 및 수정 <br> &emsp;&ensp;&ensp;&ensp;&ensp; 2. 비밀번호 수정 기능 <br> <br> <b>11/24</b> : 1. 관심 및 가입 상품 등록, 취소 기능 <br><br> <b>11/25</b> : 1. 챗봇 기능 구현 <br> <br> | |
+| 최은진 |  <br><b>11/20</b> : 1. 회사 목록 저장 API 생성 <br> &emsp;&ensp;&ensp;&ensp;&ensp; 2. 예금 목록 조회 기능 구현 <br> <br> <b>11/21</b> : 1. 예금 상세 보기 구현 <br> &emsp;&ensp;&ensp;&ensp;&ensp; 2. 적금 조회 및 상세 보기 구현 <br> &emsp;&ensp;&ensp;&ensp;&ensp; 3. 예적금 검색 기능 구현 <br> &emsp;&ensp;&ensp;&ensp;&ensp; 4. 카카오API 지도 출력 구현 <br> <br> <b>11/22</b> : 1. 카카오맵 지도 검색 후 결과 출력 구현 <br> &emsp;&ensp;&ensp;&ensp;&ensp; 2. 환율 계산기 기능 구현 <br> <br> <b>11/23</b> : 1. board 게시판 CRUD 및 상세 보기 구현 <br> <br> <b>11/24</b> 1. 댓글 관련 기능 구현 <br> &emsp;&ensp;&ensp;&ensp;&ensp; 2. map 관련 bootstrap style 구현 <br> &emsp;&ensp;&ensp;&ensp;&ensp; 3. 예/적금 관련 bootstrap style 구현 <br> &emsp;&ensp;&ensp;&ensp;&ensp; 4. 게시판 관련 bootstrap style 구현 <br> &emsp;&ensp;&ensp;&ensp;&ensp; 5. 환율 관련 bootstrap style 구현 <br><br> <b>11/25</b> : 1. profile 관련 bootstrap style 구현 <br> &emsp;&ensp;&ensp;&ensp;&ensp; 2. 로그인 bootstrap style 구현 <br> &emsp;&ensp;&ensp;&ensp;&ensp; 3. 회원가입 bootstrap style 구현 <br> <br> |
 
 ## 🌈 개발 일정
 ![calander](https://github.com/user-attachments/assets/5f41b80d-ec50-44b0-8938-1632c5355e54)
 <br><br>
 
 ## 🗂️ ERD
-![erd](https://github.com/user-attachments/assets/24fec218-14f1-40c2-b3f5-3a7e4bd30fdc)
+![erd](https://github.com/user-attachments/assets/77ce7c94-c8fe-4890-8199-51415fd718f9)
+
 <br><br>
 
 ## 📋 설계 📋
@@ -58,3 +60,20 @@
 6. [GIT 컨벤션](https://cosmic-flame-b59.notion.site/GIT-1435c5a8c4c7803db923eb54708caa2b?pvs=4)
 
 - [전체 notion 링크](https://cosmic-flame-b59.notion.site/1345c5a8c4c7805cab0fc33a72e0109c?pvs=4)
+
+
+<br>
+
+## ⭐ 추천 시스템 로직 ⭐
+  🐣 챗봇을 이용해 회원가입 시 입력 받은 유저의 정보와 챗봇에게 보낸 메세지를 토대로 <br> &emsp;&ensp;프롬프트를 생성한 후에 완성된 프롬프트를 챗봇 서버에 보내 상품을 추천하게 하는 로직 구현 <br><br>
+
+### 챗봇 작동 타임라인
+1. 대화 입력 시 Django 서버로 GET 요청을 보내 이전 대화 내용 저장
+2. 입력 메시지를 DB에 저장하고 openAI 웨이 포인트로 요청
+3. 응답 받으면 응답 데이터 저장
+4. 유저가 요청 보낸 메시지와 응답 받은 메시지를 서버로 전송
+
+### 프롬프트
+```
+프롬프트 글 내용
+```
