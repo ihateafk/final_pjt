@@ -2,7 +2,11 @@
   <div class="container vh-70 d-flex align-items-center justify-content-center">
     <div class="row w-100 search-container">
       <div class="col-12 text-center mb-4">
-        <h1>HomePage Logo</h1>
+        <img 
+            src="/mainlogo.png" 
+            alt="main logo" 
+            style="height: 100px; width: 100px;"
+          >
       </div>
       <div class="col-12">
         <div class="search-wrapper d-flex align-items-stretch" @click="$router.push({ name: 'recommend' })">
