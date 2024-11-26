@@ -5,13 +5,11 @@
       class="text-decoration-none w-100"
     >
       <div class="d-flex justify-content-between align-items-center">
-        <!-- 왼쪽 텍스트 영역 -->
         <div class="flex-grow-1 d-flex align-items-center gap-3">
           <h6 class="article-title mb-0">{{ article.title }}</h6>
           <span class="author-name">{{ article.user.name }}</span>
         </div>
         
-        <!-- 오른쪽 댓글 수 표시 -->
         <div class="d-flex align-items-center comment-section">
           <span class="comment-count">
             댓글 {{ article.comment_count }}
@@ -59,7 +57,6 @@
     font-size: 0.875rem;
   }
   
-  /* hover 상태일 때 부모 컴포넌트의 스타일과 조화를 이루도록 조정 */
   :deep(.board-item:hover) {
     .article-title {
       color: #000;
@@ -70,7 +67,6 @@
     }
   }
   
-  /* 반응형 조정 */
   @media (max-width: 768px) {
     .article-title {
       font-size: 0.9rem;

@@ -54,7 +54,7 @@ const logout = function () {
             <li class="nav-item">
               <RouterLink class="nav-link" :to="{ name: 'map'}" @mouseover="setActiveLink('map')" @mouseleave="removeActiveLink">은행 지도</RouterLink>
             </li>
-            <li class="nav-item" v-if="userStore.token !== null">
+            <li class="nav-item">
               <RouterLink class="nav-link" :to="{ name: 'board'}" @mouseover="setActiveLink('board')" @mouseleave="removeActiveLink">게시판</RouterLink>
             </li>
           </ul>
