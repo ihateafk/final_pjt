@@ -2,26 +2,31 @@ from django.shortcuts import get_object_or_404, render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from .models import Board, Comment
-from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny, IsAuthenticatedOrReadOnly
 from .serializers import ArticleListSerizlizer, ArticleSerializer, CommentListSerializer, CommentSerializer
 
 # Create your views here.
-@api_view(['GET'])
-@permission_classes([AllowAny])
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticatedOrReadOnly])
 def board_list(request) :
     if request.method == 'GET' :
-        articles = Board.objects.all()
+        articles = Board.objects.all().order_by('-created_at')
         serializers = ArticleListSerizlizer(articles, many=True)
         return Response(serializers.data)
-
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def board_list(request) :
-    if request.method == 'POST' :
+    elif request.method == 'POST' :
         serializers = ArticleSerializer(data=request.data)
         if serializers.is_valid(raise_exception=True) :
             serializers.save(user=request.user)
             return Response(serializers.data)
+
+# @api_view(['POST'])
+# @permission_classes([IsAuthenticated])
+# def board_list(request) :
+#     if request.method == 'POST' :
+#         serializers = ArticleSerializer(data=request.data)
+#         if serializers.is_valid(raise_exception=True) :
+#             serializers.save(user=request.user)
+#             return Response(serializers.data)
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def board_detail(request, board_id):

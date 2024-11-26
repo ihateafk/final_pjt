@@ -71,6 +71,7 @@ const login = function () {
     .catch((err) => {
       console.log('LOGIN FAILED')
       console.log(err.response.data)
+      alert('존재하지 않은 이메일이거나 비밀번호가 틀렸습니다')
     })
 }
 
