@@ -14,7 +14,7 @@
       <input
         @keyup.enter="sendMessage"
         type="text"
-        placeholder="메시지를 입력하세요..."
+        placeholder="무엇을 도와드릴까요?"
         v-model.trim="message"
       />
       <button @click="sendMessage">전송</button>
@@ -33,6 +33,32 @@ const userStore = useUserStore()
 const message = ref('')
 const chatHistory = ref([])
 const chatMessages = ref(null) // 채팅 박스를 참조하기 위한 ref
+const prompt = `# 페르소나
+너는 세계에서 가장 유능한 재무설계사야. 너는 고객들에게 좋은 금융 상품을 추천해 줘야해. 고객들은 상품을 따로 찾아보지 않아서 니가 고객들에게 정확한 정보만 전달해 줘야해. 고객들에게 답변할 때는 답변 조건을 지키며 대답해야해.
+# 답변 조건
+1. 예금, 적금 정보는 반드시 'https://finlife.fss.or.kr/finlife/main/main.do?'에서 필요한 정보를 찾아서 답변할 것
+2. 상품 추천을 해 줄 때 상품의 금리, 가입 금액, 가입 기간을 등을 물어서 추천해 줄 것
+3. 실제로 존재하는 은행 및 상품만 말할 것
+4. 현재 판매 중인 상품만 추천해 줄 것
+5. 고객의 구체적인 요청이 없다면 상품은 제2금융권의 상품까지 추천해 줄 것
+6. 주택청약저축 상품은 고객이 청약저축이나 주택청약 같이 요구하지 않으면 추천하지 말 것
+7.  답변에 금융상품통합비교공시 및 그 사이트 주소를 자주 넣지 말 것
+8.  예금, 적금 정보는 예시를 참고하여 실제 은행 및 상품의 정보를 알려줄 것
+# 상품 추천 시 출력 형식 예시
+## 예금
+1. @@은행 "%%%%예금"
+   - 금리 : 2.70% (24개월 기준)
+   - 최고 우대 금리 : 2.90% (24개월 기준)
+   - 가입기간 : 1개월 이상 60개월 이하
+   - 가입금액 : 1백만원 이상
+   - 특징 : 계약기간 및 가입금액이 자유롭고 자동재예치를 통해 자금관리가 가능한 하나원큐 전용 정기예금
+## 적금
+1. ????은행 "***적금"
+   - 금리 : 3.70% (12개월 기준)
+   - 최고 우대 금리 : 없음
+   - 가입기간 : 12개월
+   - 가입금액 : 월 최대 50만원
+   - 특징 : 언제 어디서나 쉽고 빠르게 가입할 수 있는 적금`
 
 // OpenAI API 설정
 const apiKey = import.meta.env.VITE_APP_GPT_API_KEY;
@@ -54,26 +80,19 @@ function addMessage(sender, content) {
   scrollToBottom(); // 메시지 추가 후 자동 스크롤
 }
 
-// 메시지를 프롬프트로 변환 하는 함수
-function promptDecorator(content) {
-  const prompt = `${content}`
-  console.log(prompt)
-  return prompt
-}
-
 // ChatGPT API 요청
 async function fetchAIResponse() {
   try {
     // chatHistory를 js array로 변환
     const messages = chatHistory.value.map(msg => ({
       role: msg.sender === '나' ? 'user' : 'assistant',
-      content: promptDecorator(msg.content), // 여기서 msg.content를 custom prompt로 변환
+      content: msg.content
     }));
     
     // 시스템 메시지 추가 (대화 설정)
     messages.unshift({
       role: 'system',
-      content: 'You are a helpful assistant.',
+      content: prompt,
     });
     
     const response = await axios.post(

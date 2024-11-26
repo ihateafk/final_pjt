@@ -145,8 +145,8 @@ def drawgraph(request):
         index = np.arange(len(data))
         
         # # 각 금리 bar를 순서대로 나타내는 과정, 각 그래프는 0.25의 간격을 두고 그려짐
-        b1 = plt.bar(index, df['max_intr_rate'], bar_width, alpha=0.4, color='red', label='최고 금리')
-        b2 = plt.bar(index + bar_width, df['max_intr_rate2'], bar_width, alpha=0.4, color='blue', label='최고 우대 금리')
+        b1 = plt.bar(index, df['max_intr_rate'], bar_width, alpha=0.4, color='#A7E6FF', label='최고 금리')
+        b2 = plt.bar(index + bar_width, df['max_intr_rate2'], bar_width, alpha=0.4, color='#3ABEF9', label='최고 우대 금리')
 
         # 막대 위에 값 표시
         for i, v in enumerate(df['max_intr_rate']):
