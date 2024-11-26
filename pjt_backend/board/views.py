@@ -6,15 +6,18 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from .serializers import ArticleListSerizlizer, ArticleSerializer, CommentListSerializer, CommentSerializer
 
 # Create your views here.
-@api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def board_list(request) :
-    
     if request.method == 'GET' :
         articles = Board.objects.all()
         serializers = ArticleListSerizlizer(articles, many=True)
         return Response(serializers.data)
-    elif request.method == 'POST' :
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def board_list(request) :
+    if request.method == 'POST' :
         serializers = ArticleSerializer(data=request.data)
         if serializers.is_valid(raise_exception=True) :
             serializers.save(user=request.user)
@@ -22,10 +25,10 @@ def board_list(request) :
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def board_detail(request, board_id):
-    article = get_object_or_404(Board, id=board_id)  # 여기서 article 할당
+    article = get_object_or_404(Board, id=board_id)
     
     if request.method == 'GET':
-        comments = Comment.objects.filter(board=article)  # 이제 article 사용 가능
+        comments = Comment.objects.filter(board=article)
         serializer = ArticleSerializer(article, context={'comments': comments})
         response_data = serializer.data
         response_data['comment_set'] = CommentListSerializer(comments, many=True).data
@@ -49,12 +52,11 @@ def board_detail(request, board_id):
         return Response({'detail': '게시글이 삭제되었습니다.'}, status=204)
     
 @api_view(['GET'])
-@permission_classes([AllowAny])  # 인증 없이 댓글을 조회할 수 있게 설정 (필요에 따라 수정)
+@permission_classes([AllowAny])
 def comment_list(request, board_id):
     if request.method == 'GET':
-        # board_id에 해당하는 댓글만 가져옵니다.
-        comments = Comment.objects.filter(board_id=board_id)  # board_id 필터링
-        serializer = CommentListSerializer(comments, many=True)  # 댓글 리스트 직렬화
+        comments = Comment.objects.filter(board_id=board_id)
+        serializer = CommentListSerializer(comments, many=True)
         return Response(serializer.data)
     
 @api_view(['POST'])
@@ -67,3 +69,15 @@ def comment_create(request, board_id) :
         if serializer.is_valid(raise_exception=True) :
             serializer.save(board=board, user=request.user)
             return Response(serializer.data)
+        
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def comment_delete(request, board_id, comment_id) :
+    comment = get_object_or_404(Comment, id=comment_id)
+
+    if comment.user != request.user :
+        return Response({'detail' : '댓글 삭제 권한이 없습니다'})
+    
+    comment.delete()
+    return Response({'detail' : '댓글이 삭제되었습니다'})

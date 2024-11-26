@@ -32,13 +32,13 @@ class CommentListSerializer(serializers.ModelSerializer) :
     class UserNameSerializer(serializers.ModelSerializer) :
         class Meta :
             model = User
-            fields = ('name',)
+            fields = ('name', 'id')
     
     user = UserNameSerializer(read_only=True)
 
     class Meta :
         model = Comment
-        fields = ('comment', 'user',)
+        fields = ('id', 'comment', 'user',)
 
 
 class CommentSerializer(serializers.ModelSerializer) :

@@ -15,7 +15,7 @@
 
             <p class="content-text mb-4">{{ boardStore.articleItem?.content }}</p>
 
-            <div v-if="boardStore.isAuthor" class="d-flex gap-2 justify-content-end">
+            <div v-if="boardStore.isAuthor && userStore.token !== null" class="d-flex gap-2 justify-content-end">
                 <RouterLink
                     :to="{
                         name: 'boardUpdate',
@@ -30,32 +30,50 @@
         </div>
 
         <div class="comments-section bg-white rounded p-4">
-            <h6 class="mb-3">댓글 ({{ boardStore.comments.length }})</h6>
-            
             <div class="comment-form mb-4" v-if="userStore.token !== null">
-                <textarea 
-                    v-model="commentContent" 
-                    placeholder="댓글을 입력하세요"
-                    rows="3"
-                    class="form-control mb-2"
-                ></textarea>
+                    <h6 class="mb-3">댓글 ({{ boardStore.comments.length }})</h6>
+                    <textarea 
+                        v-model="commentContent" 
+                        placeholder="댓글을 입력하세요"
+                        rows="3"
+                        class="form-control mb-2"
+                    ></textarea>
                 <div class="d-flex justify-content-end">
                     <button @click="submitComment" class="btn btn-primary btn-sm">댓글 작성</button>
                 </div>
             </div>
-
-            <div class="comments-list">
-                <div 
-                    v-for="comment in boardStore.comments" 
-                    :key="comment.id" 
-                    class="comment-item d-flex gap-3 py-3 border-bottom"
-                >
-                    <div class="profile-image">
-                        <i class="bi bi-person-circle fs-4 text-secondary"></i>
+            <div v-if="userStore.token !== null">
+                <div class="comments-list">
+                    <div 
+                        v-for="comment in boardStore.comments" 
+                        :key="comment.id" 
+                        class="comment-item d-flex justify-content-between gap-3 py-3 border-bottom"
+                    >
+                        <div class="d-flex gap-3 flex-grow-1">
+                            <div class="profile-image">
+                                <i class="bi bi-person-circle fs-4 text-secondary"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="comment-author mb-1">{{ comment.user?.name }}</p>
+                                <p class="comment-content mb-0">{{ comment.comment }}</p>
+                            </div>
+                        </div>
+                        <div class="ms-2">
+                            <button 
+                                v-if="comment.user?.id === userStore.userId"
+                                @click="boardStore.deleteComment(comment.id)"
+                                class="btn btn-outline-danger btn-sm"
+                            >
+                                삭제
+                            </button>
+                        </div>
                     </div>
-                    <div class="flex-grow-1">
-                        <p class="comment-author mb-1">{{ comment.user?.name }}</p>
-                        <p class="comment-content mb-0">{{ comment.comment }}</p>
+                </div>
+            </div>
+            <div v-else>
+                <div class="comments-list">
+                    <div>
+                        로그인 후 댓글을 볼 수 있습니다
                     </div>
                 </div>
             </div>
@@ -64,7 +82,6 @@
 </template>
 
 <script setup>
-// 스크립트 부분은 그대로 유지
 import { computed, onMounted, watch, ref } from 'vue'
 import { useBoardsStore } from '@/stores/boards'
 import { useRouter } from 'vue-router'

@@ -60,7 +60,6 @@ export const useBoardsStore = defineStore('boards', () => {
     const getArticleDetail = function (boardId) {
         if (!boardId) return
         
-        // 데이터 초기화
         articleItem.value = null
         
         return axios({
@@ -72,7 +71,6 @@ export const useBoardsStore = defineStore('boards', () => {
         })
         .then((res) => {
             articleItem.value = res.data
-            // 게시글을 가져온 후 바로 해당 게시글의 댓글을 가져옴
             getComments(boardId)
             return res.data
         })
@@ -151,7 +149,6 @@ export const useBoardsStore = defineStore('boards', () => {
             }
         })
         .then((res) => {
-            // 댓글 작성 후 해당 게시글의 댓글 목록을 다시 불러옴
             getComments(articleItem.value.id)
         })
         .catch((err) => {
@@ -167,24 +164,50 @@ export const useBoardsStore = defineStore('boards', () => {
     const getComments = function (boardId) {
         if (!boardId) return
     
-        // 댓글 데이터 초기화
         comments.value = []
     
         axios({
             method: 'GET',
-            url: `${userStore.URL}/boards/${boardId}/comment/`,  // boardId를 URL에 추가
+            url: `${userStore.URL}/boards/${boardId}/comment/`,
             headers: {
                 Authorization: `Token ${userStore.token}`
             }
         })
         .then((res) => {
             comments.value = res.data
-            console.log('댓글 데이터:', res.data)  // 데이터 확인용
+            console.log('댓글 데이터:', res.data)
         })
         .catch((err) => {
             console.log('댓글 조회 에러:', err)
         })
     }
 
-    return { articles, getArticles, createArticle, isLogin, articleItem, updateArticle, deleteArticle, getArticleDetail, isAuthor, createComment, comments, getComments }
+    const deleteComment = function(commentId) {
+        if (!commentId) return
+        
+        if (confirm('댓글을 삭제하시겠습니까?')) {
+            axios({
+                method: 'DELETE',
+                url: `${userStore.URL}/boards/${articleItem.value.id}/comment/${commentId}/`,
+                headers: {
+                    Authorization: `Token ${userStore.token}`
+                }
+            })
+            .then(() => {
+                getComments(articleItem.value.id)
+            })
+            .catch((err) => {
+                console.log(err)
+                if (err.response && err.response.status === 403) {
+                    alert('댓글 삭제 권한이 없습니다.')
+                } else {
+                    alert('댓글 삭제 중 오류가 발생했습니다.')
+                }
+            })
+        }
+    }
+
+
+
+    return { articles, getArticles, createArticle, isLogin, articleItem, updateArticle, deleteArticle, getArticleDetail, isAuthor, createComment, comments, getComments, deleteComment }
 }, {persist : true},)
