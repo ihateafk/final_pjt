@@ -20,7 +20,15 @@
             <div class="form-group row">
               <label for="originValue" class="col-3 col-form-label">가격</label>
               <div class="col-9">
-                <input type="number" class="form-control" v-model="originValue">
+                <input 
+                  type="number" 
+                  class="form-control" 
+                  v-model="originValue"
+                  min="0" 
+                  step="1" 
+                  @input="validateInput"
+                  @keypress="preventNonNumber"
+                >
               </div>
             </div>
             <div class="form-group row">
@@ -54,17 +62,43 @@ const originValue = ref(0)
 const exchangeResult = ref(0)
 const changeRate = ref(0)
 const countryCodes = ref([])
+const originVlue = ref('')
 
-// API에서 지원하는 모든 통화 코드 가져오기
 const getCountryCodes = async () => {
   try {
     const response = await axios.get(
       `https://cors-anywhere.herokuapp.com/https://v6.exchangerate-api.com/v6/${import.meta.env.VITE_APP_EXCHANGERATE_API_KEY}/latest/USD`
     )
-    // conversion_rates 객체의 키들을 countryCodes 배열에 저장
     countryCodes.value = Object.keys(response.data.conversion_rates).sort()
   } catch (err) {
     console.error('통화 코드 가져오기 실패:', err)
+  }
+}
+
+const validateInput = (event) => {
+  let value = event.target.value
+  
+  if (value < 0) {
+    originValue.value = ''
+    return
+  }
+  
+  if (value.includes('.')) {
+    originValue.value = Math.floor(value)
+    return
+  }
+  
+  if (isNaN(value)) {
+    originValue.value = ''
+    return
+  }
+  
+  originValue.value = Math.floor(Number(value))
+}
+
+const preventNonNumber = (event) => {
+  if (!/^\d*$/.test(event.key)) {
+    event.preventDefault()
   }
 }
 
@@ -86,7 +120,6 @@ const calculateResult = () => {
   }
 }
 
-// 나라 코드나 금액이 변경될 때마다 자동 계산
 watch([originCountry, changeCountry], () => {
   getRates()
 })
@@ -143,5 +176,15 @@ input[type="number"] {
   background-color: #f5f5f5;
   border-radius: 4px;
   text-align: center;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }
 </style>
